@@ -20,6 +20,9 @@ const userSchema = new Schema({
     minlength: 5,
   },
   // If your user needs more properties, add them here. Don't forget to add them to the typeDefs.js, resolvers.js and the userSeeds.
+  company: {
+    type: String,
+  }
   
 });
 
