@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -42,19 +42,18 @@ const client = new ApolloClient({
 const lightTheme = {
   colors: {
     body: "white",
-    color: "hsl(192, 100%, 9%)"
+    color: "hsl(192, 100%, 9%)",
   },
 };
 
 const darkTheme = {
   colors: {
     body: "gray",
-    color: "white"
+    color: "white",
   },
 };
 
 function App() {
-
   const [theme, setTheme] = useState(lightTheme);
 
   return (
