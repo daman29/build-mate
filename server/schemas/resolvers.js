@@ -28,6 +28,9 @@ const resolvers = {
         "Please login as the project owner to access this project"
       );
     },
+    projects: async (parent, args, context) => {
+      return Project.find({})
+    }
   },
 
   Mutation: {

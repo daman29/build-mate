@@ -3,21 +3,19 @@
     "name": "Concrete Pour",
     "startDate": "10/07/2022",
     "endDate": "12/07/2022",
-    "predecessor": "",
-    "successor": "",
-    "projectId": "",
-    "assigneeId": "",
+    "projectId": "62f4c0ee6bad1826ff36ca6f",
+    "predecessor": "62f4c9abdc3cff53ac35e5f1",
+    "assigneeId": null,
     "priority": "high"
   },
   {
+    "_id": "62f4c9abdc3cff53ac35e5f1",
     "name": "Check plumbing before slab pour",
-    "description": "get plumbing checked against drawings to make sure it is done to spec",
+    "description": "get plumbing checked against drawings",
     "startDate": "05/07/2022",
     "endDate": "10/07/2022",
-    "predecessor": "",
-    "successor": "",
-    "projectId": "",
-    "assigneeId": "",
+    "projectId": "62f4c0ee6bad1826ff36ca6f",
+    "assigneeId": "62f4c0ee6bad1826ff36ca75",
     "priority": "high"
   }
 ]

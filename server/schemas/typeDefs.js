@@ -51,7 +51,7 @@ const typeDefs = gql`
     users: [User]
     me: User
     project(_id: ID!): Project
-    projects(user: ID): [Project]
+    projects: [Project]
     team(user: ID): [Teammate] 
   }
 
