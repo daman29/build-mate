@@ -66,7 +66,7 @@ const typeDefs = gql`
     project(_id: ID!): FullProject
     projects: [Project]
     team: [Teammate]
-    profile(userId: ID): Profile
+    profile: Profile
   }
 
   type Mutation {
