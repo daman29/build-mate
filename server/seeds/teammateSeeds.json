@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Tim",
+    "role": "Bricky",
+    "phoneNumber": "0412345678",
+    "email": "tim@email.com",
+    "teamLeadId": "62f4bc86ed96ae9335f79f0f"
+  },
+  {
+    "name": "Max",
+    "role": "Sparky",
+    "phoneNumber": "0412345678",
+    "email": "max@email.com",
+    "teamLeadId": "62f4bc86ed96ae9335f79f0f"
+  },
+  {
+    "name": "Bob",
+    "role": "Plumber",
+    "phoneNumber": "0412345678",
+    "email": "bob@email.com",
+    "teamLeadId": "62f4bc86ed96ae9335f79f0f"
+  },
+  {
+    "name": "Jim",
+    "role": "Chippy",
+    "phoneNumber": "0412345678",
+    "email": "jim@email.com",
+    "teamLeadId": "62f4bc86ed96ae9335f79f0f"
+  }
+]
