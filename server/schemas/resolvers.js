@@ -14,14 +14,19 @@ const resolvers = {
       throw new AuthenticationError("You must be signed in");
     },
     project: async (parent, { _id }, context) => {
-      const project = await Project.findById(_id);
+      const project = await Project.findById(_id).populate("owner");
+      const tasks = await Task.find({
+        projectId: _id,
+      });
 
-      if (!project) {
-        throw new AuthenticationError("No Project with the given ID");
-      }
+      if (context.user) {
+        if (!project) {
+          throw new AuthenticationError("No Project with the given ID");
+        }
 
-      if (project.owner === context.user._id) {
-        return project;
+        if (project.owner === context.user._id) {
+          return { project, tasks };
+        }
       }
 
       throw new AuthenticationError(
@@ -29,8 +34,29 @@ const resolvers = {
       );
     },
     projects: async (parent, args, context) => {
-      return Project.find({})
-    }
+      return Project.find().populate("owner");
+    },
+    team: async (parent, args, context) => {
+      const teammates = await Teammate.find({
+        teamLeadId: context.user._id,
+      }).populate("teamLeadId");
+
+      if (context.user) {
+        if (!teammates) {
+          throw new AuthenticationError("You don't have any teammates yet");
+        }
+        return teammates;
+      }
+
+      throw new AuthenticationError("Please login to view your team");
+    },
+    profile: async (parent, { userId }, context) => {
+      const user = await User.findOne({ _id: userId });
+      const projects = await Project.find({ owner: user._id });
+      const team = await Teammate.find({ teamLeadId: user._id });
+
+      return { user, projects, team };
+    },
   },
 
   Mutation: {

@@ -33,6 +33,8 @@ const typeDefs = gql`
 
   type Task {
     _id: ID
+    name: String
+    description: String
     startDate: String
     endDate: String
     predecessor: ID
@@ -40,6 +42,17 @@ const typeDefs = gql`
     projectId: Project
     assigneeId: Teammate
     priority: String
+  }
+
+  type FullProject {
+    project: Project
+    tasks: [Task]
+  }
+
+  type Profile {
+    user: User
+    projects: [Project]
+    team: [Teammate]
   }
 
   type Auth {
@@ -50,9 +63,10 @@ const typeDefs = gql`
   type Query {
     users: [User]
     me: User
-    project(_id: ID!): Project
+    project(_id: ID!): FullProject
     projects: [Project]
-    team(user: ID): [Teammate] 
+    team: [Teammate]
+    profile(userId: ID): Profile
   }
 
   type Mutation {
