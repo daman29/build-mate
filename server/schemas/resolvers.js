@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Project, Task, Teammate } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -9,9 +9,24 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ email: context.user.email});
+        return User.findOne({ email: context.user.email });
       }
-      throw new AuthenticationError('You must be signed in');
+      throw new AuthenticationError("You must be signed in");
+    },
+    project: async (parent, { _id }, context) => {
+      const project = await Project.findById(_id);
+
+      if (!project) {
+        throw new AuthenticationError("No Project with the given ID");
+      }
+
+      if (project.owner === context.user._id) {
+        return project;
+      }
+
+      throw new AuthenticationError(
+        "Please login as the project owner to access this project"
+      );
     },
   },
 
@@ -25,13 +40,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError("No user found with this email address");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);
