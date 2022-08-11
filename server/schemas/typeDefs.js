@@ -5,6 +5,41 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
+    company: String
+  }
+
+  type Project {
+    _id: ID
+    name: String
+    address: String
+    startDate: String
+    storeys: Int
+    councilApproval: Boolean
+    owner: User
+    wallType: String
+    wallType2nd: String
+    roofType: String
+    structure: String
+  }
+
+  type Teammate {
+    _id: ID
+    name: String
+    role: String
+    phoneNumber: String
+    email: String
+    teamLeadId: User
+  }
+
+  type Task {
+    _id: ID
+    startDate: String
+    endDate: String
+    predecessor: ID
+    successor: Task
+    projectId: Project
+    assigneeId: Teammate
+    priority: String
   }
 
   type Auth {
