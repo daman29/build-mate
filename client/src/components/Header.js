@@ -8,7 +8,7 @@ import { Flex } from "../styles/Flex.styled";
 
 import Auth from "../utils/auth";
 
-const Header = () => {
+const Header = ({theme}) => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -32,7 +32,7 @@ const Header = () => {
             <div>
               <h2>Build your dream project the right way!</h2>
               <p></p>
-              <Button bg="#ff0099" color="white">
+              <Button bg={theme.colors.yellow} color="black">
                 Get Started
               </Button>
             </div>

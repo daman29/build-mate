@@ -45,6 +45,9 @@ const lightTheme = {
   colors: {
     body: "white",
     color: "hsl(192, 100%, 9%)",
+    lightBlue: "#8ECAE6",
+    yellow: "#FFB703",
+    darkBlue: "#023047",
   },
   mobile: "768px",
 };
@@ -53,6 +56,9 @@ const darkTheme = {
   colors: {
     body: "gray",
     color: "white",
+    lightBlue: "#8ECAE6",
+    yellow: "#FFB703",
+    darkBlue: "#023047",
   },
   mobile: "768px",
 };
@@ -65,7 +71,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Router>
-          <Header />
+          <Header theme={theme} />
 
           <Routes>
             <Route path="/" element={<Landing />} />
