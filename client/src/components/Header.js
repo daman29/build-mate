@@ -10,11 +10,7 @@ import headerImage from "../images/header.jpg";
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";
 
-const Header = ({ theme }) => {
-  const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
+const Header = () => {
 
   return (
     <StyledHeader>
@@ -40,7 +36,7 @@ const Header = ({ theme }) => {
               <h2>Build your dream project the right way!</h2>
               <p></p>
               <Link to="/signup">
-                <Button bg={theme.colors.yellow} color="black">
+                <Button bg={({theme}) => theme.colors.yellow} color={({theme}) => theme.colors.color}>
                   Get Started
                 </Button>
               </Link>
