@@ -23,3 +23,7 @@ export const StyledFooter = styled.footer`
     }
   }
 `;
+
+export const StyledFooterMinimal = styled(StyledFooter)`
+  padding: 1%;
+`

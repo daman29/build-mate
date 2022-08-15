@@ -9,6 +9,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
+import { GlobalContainer } from "./styles/GlobalContainer.styled";
 
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -17,9 +18,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import Header from "./components/Header";
+import HeaderMinimal from "./components/HeaderMinimal";
 import Auth from "./utils/auth";
 import Landing from "./pages/Landing";
 import Footer from "./components/Footer";
+import FooterMinimal from "./components/FooterMinimal";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -70,22 +73,39 @@ const darkTheme = {
 
 function App() {
   const [theme, setTheme] = useState(lightTheme);
+  const [minimalSize, setMinimalSize] = useState(false);
 
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Router>
-          <Header theme={theme} />
+          <GlobalContainer>
+            {minimalSize ? (
+              <HeaderMinimal theme={theme} />
+            ) : (
+              <Header theme={theme} />
+            )}
 
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
+            <Routes>
+              <Route path="/" element={<Landing setMinimalSize={setMinimalSize} />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/login"
+                element={<Login setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/signup"
+                element={<Signup setMinimalSize={setMinimalSize} />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            {minimalSize ? (
+              <FooterMinimal theme={theme} />
+            ) : (
+              <Footer theme={theme} />
+            )}
+          </GlobalContainer>
         </Router>
       </ThemeProvider>
     </ApolloProvider>
