@@ -27,3 +27,21 @@ export const FormCard = styled(StyledCard)`
   border: 1px solid ${({ theme }) => theme.colors.midBlue};
   box-shadow: 0 0 10px ${({ theme }) => theme.colors.midBlue};
 `;
+
+export const CategoryCard = styled(StyledCard)`
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  margin: 10px;
+  width: 100%;
+`;
+
+export const DashboardCard = styled(CategoryCard)`
+  width: auto;
+`;
+
+export const ProjectCard = styled(CategoryCard)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
