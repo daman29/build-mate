@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import Header from "./components/Header";
+import Auth from "./utils/auth";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -44,6 +45,7 @@ const lightTheme = {
     body: "white",
     color: "hsl(192, 100%, 9%)",
   },
+  mobile: "768px",
 };
 
 const darkTheme = {
@@ -51,6 +53,7 @@ const darkTheme = {
     body: "gray",
     color: "white",
   },
+  mobile: "768px",
 };
 
 function App() {
@@ -62,6 +65,7 @@ function App() {
         <GlobalStyle />
         <Router>
           <Header />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

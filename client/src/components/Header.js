@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Logo, Nav, StyledHeader, Button } from "../styles/Header.styled";
+import { Logo, Nav, StyledHeader, Image } from "../styles/Header.styled";
 import { Container } from "../styles/Container.styled";
+import { Button } from "../styles/Button.styled";
+import { Flex } from "../styles/Flex.styled";
 
 import Auth from "../utils/auth";
 
@@ -14,10 +16,28 @@ const Header = () => {
   return (
     <StyledHeader>
       <Container>
-        <Nav>
-            <Logo></Logo>
-            <Button>Sign up now!</Button>
-        </Nav>
+        {Auth.loggedIn() ? (
+          <Nav>
+            <h1>Build Mate</h1>
+            <Button>Dashboard</Button>
+          </Nav>
+        ) : (
+          <Nav>
+            <h1>Build Mate</h1>
+            <Button>Returning User</Button>
+          </Nav>
+        )}
+
+        <Flex>
+          <div>
+            <h2>Build your dream project the right way!</h2>
+            <p></p>
+            <Button bg="#ff0099" color="white">
+              Get Started
+            </Button>
+          </div>
+          <Image />
+        </Flex>
       </Container>
     </StyledHeader>
   );
