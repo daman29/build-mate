@@ -26,7 +26,7 @@ const Header = () => {
         <Container>
           <Nav>
             <h1>Build Mate</h1>
-            <Button>Returning User</Button>
+            <Button>Login</Button>
           </Nav>
           <Flex>
             <div>
