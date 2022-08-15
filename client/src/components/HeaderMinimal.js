@@ -9,7 +9,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const HeaderMinimal = () => {
   const location = useLocation().pathname;
-  console.log(location);
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();

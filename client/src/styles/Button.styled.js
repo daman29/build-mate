@@ -16,3 +16,7 @@ export const Button = styled.button`
     transform: scale(0.98);
   }
 `;
+
+export const ProjectButton = styled(Button)`
+  padding: 3px 10px;
+`;

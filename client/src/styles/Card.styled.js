@@ -34,14 +34,34 @@ export const CategoryCard = styled(StyledCard)`
   padding: 20px;
   margin: 10px;
   width: 100%;
+  box-shadow: 0 0 10px ${({ theme }) => theme.colors.midBlue};
 `;
 
 export const DashboardCard = styled(CategoryCard)`
   width: auto;
+  box-shadow: 0 0 10px ${({ theme }) => theme.colors.midBlue};
 `;
 
 export const ProjectCard = styled(CategoryCard)`
+  width: 95%;
+  max-width: auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 0 10px ${({ theme }) => theme.colors.lightBlue};
+
+  & > div {
+    display: flex;
+    flex: 0;
+  }
+`;
+
+export const TeammateCard = styled(ProjectCard)`
+  flex-direction: column;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex: 0;
+  }
 `;

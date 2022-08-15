@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 import { Container } from "../styles/Container.styled";
 import {
@@ -11,8 +12,9 @@ import {
   CategoryCard,
   DashboardCard,
   ProjectCard,
+  TeammateCard,
 } from "../styles/Card.styled";
-import { Button } from "../styles/Button.styled";
+import { ProjectButton } from "../styles/Button.styled";
 
 const Dashboard = ({ setMinimalSize }) => {
   setMinimalSize(true);
@@ -31,20 +33,43 @@ const Dashboard = ({ setMinimalSize }) => {
             <ProjectCard>
               <h5>Project 1</h5>
               <div>
-                <Button>Open</Button>
-                <Button>Edit</Button>
+                <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                  Open
+                </ProjectButton>
+                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
+                  Edit
+                </ProjectButton>
               </div>
             </ProjectCard>
             <ProjectCard>
               <h5>Project 2</h5>
               <div>
-                <Button>Open</Button>
-                <Button>Edit</Button>
+                <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                  Open
+                </ProjectButton>
+                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
+                  Edit
+                </ProjectButton>
               </div>
             </ProjectCard>
           </DashboardCard>
           <DashboardCard>
             <h4>Your Team:</h4>
+            <TeammateCard>
+              <h5>Bricky</h5>
+              <div>
+                <h6>James May</h6>
+                <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                  <FaPhone />
+                </ProjectButton>
+                <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                  <FaEnvelope />
+                </ProjectButton>
+                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
+                  Edit
+                </ProjectButton>
+              </div>
+            </TeammateCard>
           </DashboardCard>
         </RightColumn>
       </FlexDashboard>
