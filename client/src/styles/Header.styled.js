@@ -24,6 +24,8 @@ export const Logo = styled.img`
 export const Image = styled.img`
   width: 375px;
   margin-left: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   @media (max-width: ${({ theme }) => theme.mobile}) {
     margin: 40px 0 30px;
   }

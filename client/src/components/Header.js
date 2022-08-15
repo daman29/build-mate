@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { Logo, Nav, StyledHeader, Image } from "../styles/Header.styled";
+import { Nav, StyledHeader, Image } from "../styles/Header.styled";
 import { Container } from "../styles/Container.styled";
 import { Button } from "../styles/Button.styled";
 import { Flex } from "../styles/Flex.styled";
+
+import headerImage from '../images/header.jpg'
 
 import Auth from "../utils/auth";
 
@@ -36,7 +37,7 @@ const Header = ({theme}) => {
                 Get Started
               </Button>
             </div>
-            <Image />
+            <Image src={headerImage}/>
           </Flex>
         </Container>
       )}

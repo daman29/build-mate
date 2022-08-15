@@ -19,6 +19,7 @@ import Signup from "./pages/Signup";
 import Header from "./components/Header";
 import Auth from "./utils/auth";
 import Landing from "./pages/Landing";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -48,6 +49,8 @@ const lightTheme = {
     lightBlue: "#8ECAE6",
     yellow: "#FFB703",
     darkBlue: "#023047",
+    orange: "#FB8500",
+    midBlue: "#219EBC",
   },
   mobile: "768px",
 };
@@ -59,6 +62,8 @@ const darkTheme = {
     lightBlue: "#8ECAE6",
     yellow: "#FFB703",
     darkBlue: "#023047",
+    orange: "#FB8500",
+    midBlue: "#219EBC",
   },
   mobile: "768px",
 };
@@ -80,6 +85,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </Router>
       </ThemeProvider>
     </ApolloProvider>
