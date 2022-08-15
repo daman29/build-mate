@@ -15,30 +15,31 @@ const Header = () => {
   };
   return (
     <StyledHeader>
-      <Container>
-        {Auth.loggedIn() ? (
+      {Auth.loggedIn() ? (
+        <Container>
           <Nav>
             <h1>Build Mate</h1>
             <Button>Dashboard</Button>
           </Nav>
-        ) : (
+        </Container>
+      ) : (
+        <Container>
           <Nav>
             <h1>Build Mate</h1>
             <Button>Returning User</Button>
           </Nav>
-        )}
-
-        <Flex>
-          <div>
-            <h2>Build your dream project the right way!</h2>
-            <p></p>
-            <Button bg="#ff0099" color="white">
-              Get Started
-            </Button>
-          </div>
-          <Image />
-        </Flex>
-      </Container>
+          <Flex>
+            <div>
+              <h2>Build your dream project the right way!</h2>
+              <p></p>
+              <Button bg="#ff0099" color="white">
+                Get Started
+              </Button>
+            </div>
+            <Image />
+          </Flex>
+        </Container>
+      )}
     </StyledHeader>
   );
 };
