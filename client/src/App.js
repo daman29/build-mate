@@ -11,7 +11,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import { GlobalContainer } from "./styles/GlobalContainer.styled";
 
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Login";
@@ -93,6 +93,10 @@ function App() {
               <Route
                 path="/"
                 element={<Landing setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/dashboard"
+                element={<Dashboard setMinimalSize={setMinimalSize} />}
               />
               <Route path="/profile" element={<Profile />} />
               <Route

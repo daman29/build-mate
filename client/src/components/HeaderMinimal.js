@@ -1,13 +1,15 @@
 import React from "react";
 
-import { Nav, StyledHeaderMinimal} from "../styles/Header.styled";
+import { Nav, StyledHeaderMinimal } from "../styles/Header.styled";
 import { Container } from "../styles/Container.styled";
 import { Button } from "../styles/Button.styled";
 
 import Auth from "../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const HeaderMinimal = ({ theme }) => {
+const HeaderMinimal = () => {
+  const location = useLocation().pathname;
+  console.log(location);
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -19,9 +21,16 @@ const HeaderMinimal = ({ theme }) => {
         <Container>
           <Nav>
             <h1>Build Mate</h1>
-            <Link to="/">
-              <Button>Dashboard</Button>
-            </Link>
+            {location === "/dashboard" ? (
+              <Button onClick={(e) => logout(e)} bg={({theme}) => theme.colors.yellow}>Logout</Button>
+            ) : (
+              <div>
+                <Link to="/dashboard">
+                  <Button>Dashboard</Button>
+                </Link>
+                <Button onClick={(e) => logout(e)}>Logout</Button>
+              </div>
+            )}
           </Nav>
         </Container>
       ) : (
