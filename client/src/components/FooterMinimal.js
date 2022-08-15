@@ -11,7 +11,7 @@ export default function FooterMinimal() {
         <h1>Build Mate</h1>
         <SocialIcons />
 
-        <p>&copy; 2021 Huddle. All rights reserved</p>
+        <p>&copy; 2022 Build Mate. All rights reserved</p>
         </Flex>
       </Container>
     </StyledFooterMinimal>

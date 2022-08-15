@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     font-size: 1.15em;
     margin: 0;
-    /* min-height: 100vh; */
   }
   p {
     line-height: 1.5;

@@ -21,7 +21,7 @@ export default function Footer() {
           <SocialIcons />
         </Flex>
 
-        <p>&copy; 2021 Huddle. All rights reserved</p>
+        <p>&copy; 2022 Build Mate. All rights reserved</p>
       </Container>
     </StyledFooter>
   )

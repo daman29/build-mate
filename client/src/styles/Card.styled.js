@@ -22,3 +22,8 @@ export const StyledCard = styled.div`
     flex-direction: column;
   }
 `;
+
+export const FormCard = styled(StyledCard)`
+  border: 1px solid ${({ theme }) => theme.colors.midBlue};
+  box-shadow: 0 0 10px ${({ theme }) => theme.colors.midBlue};
+`;

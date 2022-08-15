@@ -54,6 +54,7 @@ const lightTheme = {
     darkBlue: "#023047",
     orange: "#FB8500",
     midBlue: "#219EBC",
+    textFade: "hsl(192, 41%, 9%)",
   },
   mobile: "768px",
 };
@@ -67,6 +68,7 @@ const darkTheme = {
     darkBlue: "#023047",
     orange: "#FB8500",
     midBlue: "#219EBC",
+    textFade: "#e8e8e8",
   },
   mobile: "768px",
 };
@@ -88,7 +90,10 @@ function App() {
             )}
 
             <Routes>
-              <Route path="/" element={<Landing setMinimalSize={setMinimalSize} />} />
+              <Route
+                path="/"
+                element={<Landing setMinimalSize={setMinimalSize} />}
+              />
               <Route path="/profile" element={<Profile />} />
               <Route
                 path="/login"
