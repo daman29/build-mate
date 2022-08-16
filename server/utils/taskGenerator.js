@@ -5,8 +5,10 @@ const taskGenerator = (
   storeys,
   structure
 ) => {
+
   let frameDuration;
   let fitOutDuration;
+  
   switch (structure.concat(storeys)) {
     case "Timber2":
       frameDuration = 4;
@@ -158,9 +160,8 @@ const taskGenerator = (
       }
     }
   }
-  console.log(tasksArray);
-  console.log(structure.concat(storeys))
-  console.log(frameDuration, fitOutDuration)
+  
+  return tasksArray
 };
 
 module.exports = taskGenerator;

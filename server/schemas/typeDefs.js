@@ -82,7 +82,7 @@ const typeDefs = gql`
       wallType: String
       wallType2nd: String
       roofType: String
-      structure: String
+      structure: String!
     ): FullProject
     addTask(
       name: String!

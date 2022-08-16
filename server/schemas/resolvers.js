@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Project, Task, Teammate } = require("../models");
 const { signToken } = require("../utils/auth");
+const taskGenerator = require('../utils/taskGenerator')
 
 const resolvers = {
   Query: {
@@ -92,15 +93,17 @@ const resolvers = {
     },
     addProject: async (parent, args, context) => {
       
-      // if(!context.user){
-      //   throw new AuthenticationError("Please login before creating new project")
-      // }
-      // args.owner = context.user._id
+      if(!context.user){
+        throw new AuthenticationError("Please login before creating new project")
+      }
+      args.owner = context.user._id
 
       const project = await Project.create({...args})
       console.log(project)
 
-      return {project}
+      const tasks = taskGenerator(project.startDate, project._id,project.councilApproval, project.storeys, project.structure)
+
+      return {project, tasks}
     },
   },
 };
