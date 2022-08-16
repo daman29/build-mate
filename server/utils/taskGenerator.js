@@ -1,76 +1,97 @@
-const tasks = [
-  {
-    id: 0,
-    name: "Home Design",
-    description: "House drawings",
-    duration: 2,
-  },
-  {
-    id: 1,
-    name: "Site Preparation",
-    description:
-      "depending on your site, site works may involve demolishing an existing home or building retaining walls and flattening the ground to prepare it for construction, if required.",
-    duration: 2,
-  },
-  {
-    id: 2,
-    name: "Foundation",
-    description:
-      "Once the site is ready, the foundation is laid. The process includes measuring out the design on the site, pouring the footings and installing under-slab drainage, moisture barriers and termite protection.",
-    duration: 3,
-  },
-  {
-    id: 3,
-    name: "Frame",
-    description: "building frames (timber frames are usually quicker).",
-    duration: 3,
-  },
-  {
-    id: 4,
-    name: "Internal Wiring and Plumbing",
-    description:
-      "Electricians and plumbers install essential wiring and pipes for power, water, and gas.",
-    duration: 1,
-  },
-  {
-    id: 5,
-    name: "External Walls",
-    description: "Bricks or Hebel is installed",
-    duration: 2,
-  },
-  {
-    id: 6,
-    name: "Roofing, Gutters and Cladding",
-    description: "Roof sheeting, gutters, cladding and insulation are added.",
-    duration: 1,
-  },
-  {
-    id: 7,
-    name: "Lock-up",
-    description:
-      "this is the stage when all your doors and windows can be locked.",
-    duration: 2,
-  },
-  {
-    id: 8,
-    name: "Fit-Out",
-    description:
-      "electrical (including lights and powerpoints) and other fixtures and fittings including kitchen, laundry and bathroom cabinets and benchtops, tiling, tapware, mirrors, basins, baths and shower screens will be installed.",
-    duration: 6,
-  },
-  {
-    id: 9,
-    name: "Practical Completion",
-    description: "all painting, installations and detailing are completed",
-    duration: 2,
-  },
-];
-
 const taskGenerator = (
   startDate,
   projectId,
   councilApproval,
+  storeys,
+  structure
 ) => {
+  let frameDuration;
+  let fitOutDuration;
+  switch (structure.concat(storeys)) {
+    case "Timber2":
+      frameDuration = 4;
+      fitOutDuration = 8;
+      break;
+    case "Steel1":
+      frameDuration = 6;
+      fitOutDuration = 6;
+      break;
+    case "Steel2":
+      frameDuration = 6;
+      fitOutDuration = 9;
+      break;
+    default:
+      frameDuration = 3;
+      fitOutDuration = 6;
+  }
+
+  const tasks = [
+    {
+      id: 0,
+      name: "Home Design",
+      description: "House drawings",
+      duration: 2,
+    },
+    {
+      id: 1,
+      name: "Site Preparation",
+      description:
+        "depending on your site, site works may involve demolishing an existing home or building retaining walls and flattening the ground to prepare it for construction, if required.",
+      duration: 2,
+    },
+    {
+      id: 2,
+      name: "Foundation",
+      description:
+        "Once the site is ready, the foundation is laid. The process includes measuring out the design on the site, pouring the footings and installing under-slab drainage, moisture barriers and termite protection.",
+      duration: 3,
+    },
+    {
+      id: 3,
+      name: "Frame",
+      description: "building frames (timber frames are usually quicker).",
+      duration: frameDuration,
+    },
+    {
+      id: 4,
+      name: "Internal Wiring and Plumbing",
+      description:
+        "Electricians and plumbers install essential wiring and pipes for power, water, and gas.",
+      duration: 1,
+    },
+    {
+      id: 5,
+      name: "External Walls",
+      description: "Bricks or Hebel is installed",
+      duration: 2,
+    },
+    {
+      id: 6,
+      name: "Roofing, Gutters and Cladding",
+      description: "Roof sheeting, gutters, cladding and insulation are added.",
+      duration: 1,
+    },
+    {
+      id: 7,
+      name: "Lock-up",
+      description:
+        "this is the stage when all your doors and windows can be locked.",
+      duration: 2,
+    },
+    {
+      id: 8,
+      name: "Fit-Out",
+      description:
+        "electrical (including lights and powerpoints) and other fixtures and fittings including kitchen, laundry and bathroom cabinets and benchtops, tiling, tapware, mirrors, basins, baths and shower screens will be installed.",
+      duration: fitOutDuration,
+    },
+    {
+      id: 9,
+      name: "Practical Completion",
+      description: "all painting, installations and detailing are completed",
+      duration: 2,
+    },
+  ];
 
   const tasksArray = [];
   const startDateString = new Date(startDate);
@@ -138,6 +159,8 @@ const taskGenerator = (
     }
   }
   console.log(tasksArray);
+  console.log(structure.concat(storeys))
+  console.log(frameDuration, fitOutDuration)
 };
 
 module.exports = taskGenerator;
