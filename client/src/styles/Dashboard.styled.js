@@ -5,11 +5,11 @@ export const FlexDashboard = styled.div`
 `;
 
 export const LeftColumn = styled.div`
-  flex: 1 1 30%;
+  flex: 1 1 25%;
   display: flex;
 `;
 
 export const RightColumn = styled(LeftColumn)`
-  flex: 1 1 70%;
+  flex: 1 1 75%;
   flex-direction: column;
 `;

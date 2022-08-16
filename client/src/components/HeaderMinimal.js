@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Nav, StyledHeaderMinimal } from "../styles/Header.styled";
+import { Logo, Nav, StyledHeaderMinimal } from "../styles/Header.styled";
 import { Container } from "../styles/Container.styled";
 import { Button } from "../styles/Button.styled";
+import logo from '../images/logo2.svg'
 
 import Auth from "../utils/auth";
 import { Link, useLocation } from "react-router-dom";
@@ -19,7 +20,7 @@ const HeaderMinimal = () => {
       {Auth.loggedIn() ? (
         <Container>
           <Nav>
-            <h1>Build Mate</h1>
+            <Logo src={logo}/>
             {location === "/dashboard" ? (
               <Button onClick={(e) => logout(e)} bg={({theme}) => theme.colors.yellow}>Logout</Button>
             ) : (
@@ -35,7 +36,7 @@ const HeaderMinimal = () => {
       ) : (
         <Container>
           <Nav>
-            <h1>Build Mate</h1>
+          <Logo src={logo}/>
             <Link to="/">
               <Button>Home</Button>
             </Link>

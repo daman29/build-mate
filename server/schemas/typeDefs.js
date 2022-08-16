@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -37,7 +37,7 @@ const typeDefs = gql`
     description: String
     startDate: String
     endDate: String
-    predecessor: ID
+    predecessor: Task
     successor: Task
     projectId: Project
     assigneeId: Teammate
@@ -72,6 +72,29 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addProject(
+      name: String!
+      address: String!
+      startDate: String!
+      storeys: Int!
+      councilApproval: Boolean!
+      owner: ID!
+      wallType: String
+      wallType2nd: String
+      roofType: String
+      structure: String
+    ): FullProject
+    addTask(
+      name: String!
+      description: String
+      startDate: String!
+      endDate: String!
+      predecessor: ID
+      successor: ID
+      projectId: ID!
+      assigneeId: ID
+      priority: String
+    ): FullProject
   }
 `;
 

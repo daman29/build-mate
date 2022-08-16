@@ -90,6 +90,18 @@ const resolvers = {
 
       return { token, user };
     },
+    addProject: async (parent, args, context) => {
+      
+      // if(!context.user){
+      //   throw new AuthenticationError("Please login before creating new project")
+      // }
+      // args.owner = context.user._id
+
+      const project = await Project.create({...args})
+      console.log(project)
+
+      return {project}
+    },
   },
 };
 

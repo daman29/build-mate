@@ -20,11 +20,23 @@ const Dashboard = ({ setMinimalSize }) => {
   setMinimalSize(true);
   return (
     <Container>
+      <h2>Welcome back User!</h2>
       <FlexDashboard>
         <LeftColumn>
           <CategoryCard>
-            <h4>Dashboard:</h4>
-            <Link to="/projects">Projects</Link>
+            <h4>Quick Links:</h4>
+            <Link to="/projects">
+              <h5>Projects</h5>
+            </Link>
+            <Link to="/team">
+              <h5>Team</h5>
+            </Link>
+            <Link to="/team">
+              <h5>Quotes</h5>
+            </Link>
+            <Link to="/team">
+              <h5>Edit Profile</h5>
+            </Link>
           </CategoryCard>
         </LeftColumn>
         <RightColumn>

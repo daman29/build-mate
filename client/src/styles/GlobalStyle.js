@@ -22,6 +22,13 @@ const GlobalStyle = createGlobalStyle`
   h1, h2 {
     font-weight: 600;
   }
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.color};
+  }
+  a:hover{
+    color: ${({ theme }) => theme.colors.yellow};
+  }
 `;
 
 export default GlobalStyle;
