@@ -56,6 +56,26 @@ export const SInput = styled.input`
   border-radius: ${v.borderRadius};
 `;
 
+export const SSelect = styled.select`
+  outline: none;
+  border: 1px solid ${({ theme }) => theme.colors.textFade};
+  width: 100%;
+  padding: ${v.smSpacing};
+  font-size: 14px;
+  border-radius: ${v.borderRadius};
+`;
+
+export const SRange = styled(SInput)`
+  width: 50%;
+`;
+
+export const SInputWrap = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+`;
+
 export const SButton = styled.button`
   ${btnReset};
   width: 100%;

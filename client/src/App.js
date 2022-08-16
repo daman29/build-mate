@@ -23,6 +23,7 @@ import Auth from "./utils/auth";
 import Landing from "./pages/Landing";
 import Footer from "./components/Footer";
 import FooterMinimal from "./components/FooterMinimal";
+import NewProject from "./pages/NewProject";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -106,6 +107,10 @@ function App() {
               <Route
                 path="/signup"
                 element={<Signup setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/new-project"
+                element={<NewProject setMinimalSize={setMinimalSize} />}
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
