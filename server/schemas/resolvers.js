@@ -43,7 +43,7 @@ const resolvers = {
         }).populate("teamLeadId");
 
         if (!teammates) {
-          throw new AuthenticationError("You don't have any teammates yet");
+          throw new Error("You don't have any teammates yet");
         }
         return teammates;
       }

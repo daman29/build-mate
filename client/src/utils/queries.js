@@ -96,3 +96,15 @@ export const QUERY_PROJECT = gql`
     }
   }
 `;
+
+export const QUERY_TEAM = gql`
+  query team{
+    team{
+      _id
+      name
+      role
+      phoneNumber
+      email
+    }
+  }
+`

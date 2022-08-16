@@ -20,7 +20,6 @@ import {
 
 const ProjectForm = () => {
   const user = Auth.getProfile();
-//   const [approval, setApproval] = useState(true)
   const [formState, setFormState] = useState({
     name: "",
     address: "",
@@ -34,14 +33,9 @@ const ProjectForm = () => {
     structure: "Timber",
   });
 
-//   function toggleApproval() {
-//     setApproval(!approval)
-//   }
-
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
 
     if (name === "councilApproval") {
       console.log("approval clicked");

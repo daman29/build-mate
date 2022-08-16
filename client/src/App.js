@@ -24,6 +24,7 @@ import Landing from "./pages/Landing";
 import Footer from "./components/Footer";
 import FooterMinimal from "./components/FooterMinimal";
 import NewProject from "./pages/NewProject";
+import NewTask from "./pages/NewTask";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -111,6 +112,10 @@ function App() {
               <Route
                 path="/new-project"
                 element={<NewProject setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/new-task"
+                element={<NewTask setMinimalSize={setMinimalSize} />}
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
