@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import {} from "../utils/mutations";
 import { QUERY_TEAM } from "../utils/queries";
@@ -64,13 +64,8 @@ const TaskForm = () => {
     return <>Loading...</>;
   }
 
-  //   if (!loading) {
-  //     console.log(data.team);
-  //   }
 
   const teamData = data?.team || {};
-
-  console.log(teamData);
 
   return (
     <Container>
@@ -128,9 +123,11 @@ const TaskForm = () => {
                 onChange={handleChange}
               >
                 {teamData.map((teammate) => {
-                  return <option key={teammate._id} value={teammate._id}>
-                    {teammate.role} - {teammate.name}
-                  </option>;
+                  return (
+                    <option key={teammate._id} value={teammate._id}>
+                      {teammate.role} - {teammate.name}
+                    </option>
+                  );
                 })}
               </SSelect>
             </SFormControl>
