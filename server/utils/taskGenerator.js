@@ -70,9 +70,8 @@ const taskGenerator = (
   startDate,
   projectId,
   councilApproval,
-  storeys,
-  structure
 ) => {
+
   const tasksArray = [];
   const startDateString = new Date(startDate);
   let lastDate;
@@ -107,23 +106,36 @@ const taskGenerator = (
         lastDate = endDate;
         tasksArray.push(taskObj);
       }
-    }
-    // else{
+    } else {
+      if (i === 0) {
+        lastDate = startDateString;
+        endDate = new Date(lastDate);
+        endDate.setDate(endDate.getDate() + tasks[i].duration * 7);
 
-    // }
-    // let startDateCalc
-    // let lastStartDate
-    // if(tasks[i].id === 0){
-    //     startDateCalc = startDate
-    //     lastStartDate
-    // }else{
-    //     startDateCalc = tasks[i-1].startDate
-    // }
-    // let taskObj = {
-    //     name: tasks[i].name,
-    //     description: tasks[i].description,
-    //     startDate:
-    // }
+        let taskObj = {
+          name: tasks[i].name,
+          description: tasks[i].description,
+          startDate: lastDate,
+          endDate: endDate,
+          projectId: projectId,
+        };
+        lastDate = endDate;
+        tasksArray.push(taskObj);
+      } else {
+        endDate = new Date(lastDate);
+        endDate.setDate(endDate.getDate() + tasks[i].duration * 7);
+
+        let taskObj = {
+          name: tasks[i].name,
+          description: tasks[i].description,
+          startDate: lastDate,
+          endDate: endDate,
+          projectId: projectId,
+        };
+        lastDate = endDate;
+        tasksArray.push(taskObj);
+      }
+    }
   }
   console.log(tasksArray);
 };
