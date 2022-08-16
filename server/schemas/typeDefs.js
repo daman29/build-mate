@@ -95,6 +95,13 @@ const typeDefs = gql`
       assigneeId: ID
       priority: String
     ): FullProject
+    addTeam(
+      name: String!
+      role: String!
+      phoneNumber: String!
+      email: String
+      teamLeadId: ID!
+    ): Profile
   }
 `;
 

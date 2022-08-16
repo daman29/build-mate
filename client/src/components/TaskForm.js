@@ -64,8 +64,7 @@ const TaskForm = () => {
     return <>Loading...</>;
   }
 
-
-  const teamData = data?.team || {};
+  const teamData = data?.team || false;
 
   return (
     <Container>
@@ -115,22 +114,24 @@ const TaskForm = () => {
                 onChange={handleChange}
               />
             </SFormControl>
-            <SFormControl>
-              <SLabel>Assign to a teammate</SLabel>
-              <SSelect
-                name="assigneeId"
-                value={formState.assigneeId}
-                onChange={handleChange}
-              >
-                {teamData.map((teammate) => {
-                  return (
-                    <option key={teammate._id} value={teammate._id}>
-                      {teammate.role} - {teammate.name}
-                    </option>
-                  );
-                })}
-              </SSelect>
-            </SFormControl>
+            {teamData && (
+              <SFormControl>
+                <SLabel>Assign to a teammate</SLabel>
+                <SSelect
+                  name="assigneeId"
+                  value={formState.assigneeId}
+                  onChange={handleChange}
+                >
+                  {teamData.map((teammate) => {
+                    return (
+                      <option key={teammate._id} value={teammate._id}>
+                        {teammate.role} - {teammate.name}
+                      </option>
+                    );
+                  })}
+                </SSelect>
+              </SFormControl>
+            )}
 
             <SButton type="button" onClick={handleFormSubmit}>
               Submit

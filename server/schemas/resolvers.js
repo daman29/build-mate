@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Project, Task, Teammate } = require("../models");
 const { signToken } = require("../utils/auth");
-const taskGenerator = require('../utils/taskGenerator')
+const taskGenerator = require("../utils/taskGenerator");
 
 const resolvers = {
   Query: {
@@ -92,18 +92,41 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, args, context) => {
-      
-      if(!context.user){
-        throw new AuthenticationError("Please login before creating new project")
+      if (!context.user) {
+        throw new AuthenticationError(
+          "Please login before creating new project"
+        );
       }
-      args.owner = context.user._id
+      args.owner = context.user._id;
 
-      const project = await Project.create({...args})
-      console.log(project)
+      const project = await Project.create({ ...args });
+      console.log(project);
 
-      const tasks = taskGenerator(project.startDate, project._id,project.councilApproval, project.storeys, project.structure)
+      const tasks = taskGenerator(
+        project.startDate,
+        project._id,
+        project.councilApproval,
+        project.storeys,
+        project.structure
+      );
 
-      return {project, tasks}
+      return { project, tasks };
+    },
+    addTeam: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError(
+          "Please login before creating new project"
+        );
+      }
+      args.teamLeadId = context.user._id;
+
+      const teammate = await Teammate.create({ ...args });
+
+      const user = await User.findOne({ _id: context.user._id});
+      const projects = await Project.find({ owner: user._id });
+      const team = await Teammate.find({ teamLeadId: user._id });
+
+      return { user, projects, team };
     },
   },
 };

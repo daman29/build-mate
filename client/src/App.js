@@ -25,6 +25,7 @@ import Footer from "./components/Footer";
 import FooterMinimal from "./components/FooterMinimal";
 import NewProject from "./pages/NewProject";
 import NewTask from "./pages/NewTask";
+import NewTeam from "./pages/NewTeam";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -116,7 +117,10 @@ function App() {
               <Route
                 path="/new-task"
                 element={<NewTask setMinimalSize={setMinimalSize} />}
-              />
+              /><Route
+              path="/new-teammate"
+              element={<NewTeam setMinimalSize={setMinimalSize} />}
+            />
               <Route path="*" element={<NotFound />} />
             </Routes>
             {minimalSize ? (
