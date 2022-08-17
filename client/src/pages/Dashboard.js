@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
 
+import { useQuery } from "@apollo/client";
+import { QUERY_DASHBOARD } from "../utils/queries";
+
 import { Container } from "../styles/Container.styled";
 import {
   FlexDashboard,
@@ -15,9 +18,20 @@ import {
   TeammateCard,
 } from "../styles/Card.styled";
 import { ProjectButton } from "../styles/Button.styled";
+import ProjectCardComponent from "../components/ProjectCardComponent";
 
 const Dashboard = ({ setMinimalSize }) => {
+  const { loading, data } = useQuery(QUERY_DASHBOARD);
   setMinimalSize(true);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  const dashboardData = data?.profile;
+
+  console.log(dashboardData);
+
   return (
     <Container>
       <h2>Welcome back User!</h2>
@@ -42,28 +56,7 @@ const Dashboard = ({ setMinimalSize }) => {
         <RightColumn>
           <DashboardCard>
             <h4>Your Projects:</h4>
-            <ProjectCard>
-              <h5>Project 1</h5>
-              <div>
-                <ProjectButton bg={({ theme }) => theme.colors.orange}>
-                  Open
-                </ProjectButton>
-                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
-                  Edit
-                </ProjectButton>
-              </div>
-            </ProjectCard>
-            <ProjectCard>
-              <h5>Project 2</h5>
-              <div>
-                <ProjectButton bg={({ theme }) => theme.colors.orange}>
-                  Open
-                </ProjectButton>
-                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
-                  Edit
-                </ProjectButton>
-              </div>
-            </ProjectCard>
+            {dashboardData.projects.map((project) => <ProjectCardComponent key={project._id} project={project}/>)}
           </DashboardCard>
           <DashboardCard>
             <h4>Your Team:</h4>
