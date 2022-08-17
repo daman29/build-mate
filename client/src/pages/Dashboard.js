@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_DASHBOARD } from "../utils/queries";
@@ -14,11 +13,10 @@ import {
 import {
   CategoryCard,
   DashboardCard,
-  ProjectCard,
-  TeammateCard,
 } from "../styles/Card.styled";
-import { ProjectButton } from "../styles/Button.styled";
 import ProjectCardComponent from "../components/ProjectCardComponent";
+import Auth from "../utils/auth";
+import TeammateCardComponent from "../components/TeammateCardComponent";
 
 const Dashboard = ({ setMinimalSize }) => {
   const { loading, data } = useQuery(QUERY_DASHBOARD);
@@ -29,12 +27,13 @@ const Dashboard = ({ setMinimalSize }) => {
   }
 
   const dashboardData = data?.profile;
+  const user = Auth.getProfile();
 
   console.log(dashboardData);
 
   return (
     <Container>
-      <h2>Welcome back User!</h2>
+      <h2>Good Day {user.data.username}!</h2>
       <FlexDashboard>
         <LeftColumn>
           <CategoryCard>
@@ -56,25 +55,15 @@ const Dashboard = ({ setMinimalSize }) => {
         <RightColumn>
           <DashboardCard>
             <h4>Your Projects:</h4>
-            {dashboardData.projects.map((project) => <ProjectCardComponent key={project._id} project={project}/>)}
+            {dashboardData.projects.map((project) => (
+              <ProjectCardComponent key={project._id} project={project} />
+            ))}
           </DashboardCard>
           <DashboardCard>
             <h4>Your Team:</h4>
-            <TeammateCard>
-              <h5>Bricky</h5>
-              <div>
-                <h6>James May</h6>
-                <ProjectButton bg={({ theme }) => theme.colors.orange}>
-                  <FaPhone />
-                </ProjectButton>
-                <ProjectButton bg={({ theme }) => theme.colors.orange}>
-                  <FaEnvelope />
-                </ProjectButton>
-                <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
-                  Edit
-                </ProjectButton>
-              </div>
-            </TeammateCard>
+            {dashboardData.team.map((teammate) => (
+              <TeammateCardComponent teammate={teammate} />
+            ))}
           </DashboardCard>
         </RightColumn>
       </FlexDashboard>
