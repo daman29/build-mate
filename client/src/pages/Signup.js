@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import { Flex } from "../styles/Flex.styled";
-import { Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
 
 import {
@@ -50,7 +50,7 @@ const Signup = ({setMinimalSize}) => {
   };
 
   return (
-    <Container>
+    <CenterContainer>
       <Flex>
         <div>
           <h2>Sign up to continue.</h2>
@@ -97,7 +97,7 @@ const Signup = ({setMinimalSize}) => {
           )}
         </FormCard>
       </Flex>
-    </Container>
+    </CenterContainer>
   );
 };
 

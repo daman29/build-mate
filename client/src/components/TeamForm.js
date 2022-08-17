@@ -4,7 +4,7 @@ import {} from "../utils/mutations";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
-import { Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
 
 import {
@@ -57,7 +57,7 @@ const TeamForm = () => {
   };
 
   return (
-    <Container>
+    <CenterContainer>
       <Flex>
         <div>
           <h2>Create a New Teammate.</h2>
@@ -132,7 +132,7 @@ const TeamForm = () => {
           )} */}
         </FormCard>
       </Flex>
-    </Container>
+    </CenterContainer>
   );
 };
 

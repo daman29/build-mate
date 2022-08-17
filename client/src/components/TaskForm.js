@@ -5,7 +5,7 @@ import { QUERY_TEAM } from "../utils/queries";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
-import { Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
 
 import {
@@ -67,7 +67,7 @@ const TaskForm = () => {
   const teamData = data?.team || false;
 
   return (
-    <Container>
+    <CenterContainer>
       <Flex>
         <div>
           <h2>Create a New Task.</h2>
@@ -142,7 +142,7 @@ const TaskForm = () => {
           )} */}
         </FormCard>
       </Flex>
-    </Container>
+    </CenterContainer>
   );
 };
 

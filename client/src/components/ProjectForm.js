@@ -4,7 +4,7 @@ import {} from "../utils/mutations";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
-import { Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
 
 import {
@@ -76,7 +76,7 @@ const ProjectForm = () => {
   };
 
   return (
-    <Container>
+    <CenterContainer>
       <Flex>
         <div>
           <h2>Create a New Project.</h2>
@@ -199,7 +199,7 @@ const ProjectForm = () => {
           )} */}
         </FormCard>
       </Flex>
-    </Container>
+    </CenterContainer>
   );
 };
 

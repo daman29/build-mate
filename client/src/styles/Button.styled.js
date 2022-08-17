@@ -20,3 +20,7 @@ export const Button = styled.button`
 export const ProjectButton = styled(Button)`
   padding: 3px 10px;
 `;
+
+export const MinimalButton = styled(Button)`
+  padding: 10px 30px;
+`;

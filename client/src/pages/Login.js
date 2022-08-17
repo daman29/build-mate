@@ -4,7 +4,7 @@ import { LOGIN_USER } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
-import { Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
 
 import {
@@ -52,7 +52,7 @@ const Login = (props) => {
   };
 
   return (
-    <Container>
+    <CenterContainer>
       <Flex>
         <div>
           <h2>Sign in to continue.</h2>
@@ -91,7 +91,7 @@ const Login = (props) => {
             )}
         </FormCard>
       </Flex>
-    </Container>
+    </CenterContainer>
   );
 };
 

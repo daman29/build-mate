@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_DASHBOARD } from "../utils/queries";
 
-import { Container } from "../styles/Container.styled";
+import { CenterContainer, Container } from "../styles/Container.styled";
 import {
   FlexDashboard,
   LeftColumn,
@@ -29,10 +29,9 @@ const Dashboard = ({ setMinimalSize }) => {
   const dashboardData = data?.profile;
   const user = Auth.getProfile();
 
-  console.log(dashboardData);
 
   return (
-    <Container>
+    <CenterContainer>
       <h2>Good Day {user.data.username}!</h2>
       <FlexDashboard>
         <LeftColumn>
@@ -62,12 +61,12 @@ const Dashboard = ({ setMinimalSize }) => {
           <DashboardCard>
             <h4>Your Team:</h4>
             {dashboardData.team.map((teammate) => (
-              <TeammateCardComponent teammate={teammate} />
+              <TeammateCardComponent key={teammate._id} teammate={teammate} />
             ))}
           </DashboardCard>
         </RightColumn>
       </FlexDashboard>
-    </Container>
+    </CenterContainer>
   );
 };
 
