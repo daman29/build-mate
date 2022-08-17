@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_DASHBOARD } from "../utils/queries";
 
-import { CenterContainer, Container } from "../styles/Container.styled";
+import { CenterContainer } from "../styles/Container.styled";
 import {
   FlexDashboard,
   LeftColumn,
@@ -17,6 +17,7 @@ import {
 import ProjectCardComponent from "../components/ProjectCardComponent";
 import Auth from "../utils/auth";
 import TeammateCardComponent from "../components/TeammateCardComponent";
+import { ProjectButton } from "../styles/Button.styled";
 
 const Dashboard = ({ setMinimalSize }) => {
   const { loading, data } = useQuery(QUERY_DASHBOARD);
@@ -53,13 +54,13 @@ const Dashboard = ({ setMinimalSize }) => {
         </LeftColumn>
         <RightColumn>
           <DashboardCard>
-            <h4>Your Projects:</h4>
+            <h4>Your Projects: <Link to="/new-project"><ProjectButton bg={({ theme }) => theme.colors.lightBlue}>New Project</ProjectButton></Link></h4> 
             {dashboardData.projects.map((project) => (
               <ProjectCardComponent key={project._id} project={project} />
             ))}
           </DashboardCard>
           <DashboardCard>
-            <h4>Your Team:</h4>
+            <h4>Your Team: <Link to="/new-teammate"><ProjectButton bg={({ theme }) => theme.colors.lightBlue}>New Teammate</ProjectButton></Link></h4>
             {dashboardData.team.map((teammate) => (
               <TeammateCardComponent key={teammate._id} teammate={teammate} />
             ))}
