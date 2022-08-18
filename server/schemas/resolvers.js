@@ -19,7 +19,7 @@ const resolvers = {
         const project = await Project.findById(_id).populate("owner");
         const tasks = await Task.find({
           projectId: _id,
-        }).populate('assigneeId');
+        }).populate('assigneeId').sort({startDate: 1});
 
         if (!project) {
           throw new AuthenticationError("No Project with the given ID");
