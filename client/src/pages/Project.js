@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { GanttComponent } from "@syncfusion/ej2-react-gantt";
+import { GanttComponent, ColumnDirective, ColumnsDirective } from "@syncfusion/ej2-react-gantt";
 
 import { QUERY_PROJECT } from "../utils/queries";
 import { CenterContainer } from "../styles/Container.styled";
@@ -24,16 +24,13 @@ const Project = (props) => {
   const ganttTasks = [];
 
   for (let i = 0; i < projectData.tasks.length; i++) {
-    const duration =
-      (projectData.tasks[i].endDate - projectData.tasks[i].startDate) / 1000;
     let taskObj = {
       taskId: i,
       name: projectData.tasks[i].name,
-      startDate: new Date(projectData.tasks[i].startDate*1),
-      endDate: new Date(projectData.tasks[i].endDate*1),
+      startDate: new Date(projectData.tasks[i].startDate * 1),
+      endDate: new Date(projectData.tasks[i].endDate * 1),
+      owner: projectData.tasks[i].assigneeId?.name
     };
-
-    console.log(duration)
 
     ganttTasks.push(taskObj);
   }
@@ -43,10 +40,11 @@ const Project = (props) => {
     name: "name",
     startDate: "startDate",
     endDate: "endDate",
+    owner: "owner"
   };
-  const timelineSettings ={
-    timelineViewMode: "Week"
-  }
+  const timelineSettings = {
+    timelineViewMode: "Month",
+  };
 
   return (
     <CenterContainer>
@@ -55,7 +53,15 @@ const Project = (props) => {
         height="450px"
         taskFields={taskFields}
         timelineSettings={timelineSettings}
-      />
+      >
+        <ColumnsDirective>
+          <ColumnDirective field="taskId" headerText="Task-Id" width="100"></ColumnDirective>
+          <ColumnDirective field="name" headerText="Task Name" width="250"></ColumnDirective>
+          <ColumnDirective field="startDate" headerText="Start Date" width="100"></ColumnDirective>
+          <ColumnDirective field="endDate" headerText="End Date" width="100"></ColumnDirective>
+          <ColumnDirective field="owner" headerText="Assigned Teammate" width="200"></ColumnDirective>
+        </ColumnsDirective>
+      </GanttComponent>
     </CenterContainer>
   );
 };
