@@ -13,13 +13,11 @@ import {
   SForm,
   SFormControl,
   SInput,
-  SInputWrap,
   SLabel,
-  SRange,
   SSelect,
 } from "../styles/FormStyle";
 
-const TaskForm = () => {
+const TaskForm = ({projectName, projectIdd}) => {
   const user = Auth.getProfile();
   const { loading, data } = useQuery(QUERY_TEAM);
   const [formState, setFormState] = useState({
@@ -27,7 +25,7 @@ const TaskForm = () => {
     description: "",
     startDate: "",
     endDate: "",
-    projectId: "",
+    projectId: projectIdd,
     assigneeId: "",
   });
 
@@ -71,11 +69,11 @@ const TaskForm = () => {
       <Flex>
         <div>
           <h2>Create a New Task.</h2>
-          <p>Create a new task for the project x.</p>
+          <p>Create a new task for the project {projectName}.</p>
         </div>
         <FormCard>
           <SForm>
-            <h4>Project X</h4>
+            <h4>{projectName}</h4>
             <SFormControl>
               <SLabel>Name:</SLabel>
               <SInput

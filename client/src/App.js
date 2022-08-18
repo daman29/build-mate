@@ -117,7 +117,7 @@ function App() {
                 element={<NewProject setMinimalSize={setMinimalSize} />}
               />
               <Route
-                path="/new-task"
+                path="/new-task/:projectName/:projectId"
                 element={<NewTask setMinimalSize={setMinimalSize} />}
               />
               <Route
