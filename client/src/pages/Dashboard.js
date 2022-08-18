@@ -18,6 +18,11 @@ import ProjectCardComponent from "../components/ProjectCardComponent";
 import Auth from "../utils/auth";
 import TeammateCardComponent from "../components/TeammateCardComponent";
 import { ProjectButton } from "../styles/Button.styled";
+import styled from "styled-components";
+
+const StyledHeading = styled.h2`
+  text-align: center;
+`
 
 const Dashboard = ({ setMinimalSize }) => {
   const { loading, data } = useQuery(QUERY_DASHBOARD);
@@ -33,7 +38,7 @@ const Dashboard = ({ setMinimalSize }) => {
 
   return (
     <CenterContainer>
-      <h2>Good Day {user.data.username}!</h2>
+      <StyledHeading>Good Day {user.data.username}! Here is your dashboard.</StyledHeading>
       <FlexDashboard>
         <LeftColumn>
           <CategoryCard>

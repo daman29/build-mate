@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { registerLicense } from "@syncfusion/ej2-base";
 import {
   ApolloClient,
   ApolloProvider,
@@ -12,7 +13,6 @@ import GlobalStyle from "./styles/GlobalStyle";
 import { GlobalContainer } from "./styles/GlobalContainer.styled";
 
 import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -26,6 +26,7 @@ import FooterMinimal from "./components/FooterMinimal";
 import NewProject from "./pages/NewProject";
 import NewTask from "./pages/NewTask";
 import NewTeam from "./pages/NewTeam";
+import Project from "./pages/Project";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -47,6 +48,8 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+registerLicense(process.env.REACT_APP_SYNCFUSION_LICENCE_KEY)
 
 const lightTheme = {
   colors: {
@@ -101,7 +104,6 @@ function App() {
                 path="/dashboard"
                 element={<Dashboard setMinimalSize={setMinimalSize} />}
               />
-              <Route path="/profile" element={<Profile />} />
               <Route
                 path="/login"
                 element={<Login setMinimalSize={setMinimalSize} />}
@@ -117,10 +119,15 @@ function App() {
               <Route
                 path="/new-task"
                 element={<NewTask setMinimalSize={setMinimalSize} />}
-              /><Route
-              path="/new-teammate"
-              element={<NewTeam setMinimalSize={setMinimalSize} />}
-            />
+              />
+              <Route
+                path="/new-teammate"
+                element={<NewTeam setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/project/:projectId"
+                element={<Project setMinimalSize={setMinimalSize} />}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
             {minimalSize ? (

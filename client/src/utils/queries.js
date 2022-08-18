@@ -53,7 +53,7 @@ export const QUERY_DASHBOARD = gql`
 `;
 
 export const QUERY_PROJECT = gql`
-  query project($project: ID) {
+  query project($project: ID!) {
     project(_id: $project) {
       project {
         _id

@@ -19,14 +19,13 @@ const resolvers = {
         const project = await Project.findById(_id).populate("owner");
         const tasks = await Task.find({
           projectId: _id,
-        });
+        }).populate('assigneeId');
+
         if (!project) {
           throw new AuthenticationError("No Project with the given ID");
         }
 
-        if (project.owner === context.user._id) {
-          return { project, tasks };
-        }
+        return { project, tasks };
       }
 
       throw new AuthenticationError(
@@ -122,7 +121,7 @@ const resolvers = {
 
       const teammate = await Teammate.create({ ...args });
 
-      const user = await User.findOne({ _id: context.user._id});
+      const user = await User.findOne({ _id: context.user._id });
       const projects = await Project.find({ owner: user._id });
       const team = await Teammate.find({ teamLeadId: user._id });
 
