@@ -1,5 +1,5 @@
-import { StyledModal } from "../styles/Modal.styled";
-import { useRef } from "react";
+import { Background, StyledModal } from "../styles/Modal.styled";
+import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 
 const TeamModal = ({ teamModal, setTeamModal, teamData }) => {
@@ -13,12 +13,34 @@ const TeamModal = ({ teamModal, setTeamModal, teamData }) => {
     transform: teamModal ? `translateY(0%)` : `translateY(-100%)`,
   });
 
+  const closeModal = (e) => {
+    if (modalRef.current === e.target) {
+      setTeamModal(false);
+    }
+  };
+
+  const keyPress = useCallback(
+    (e) => {
+      if (e.key === "Escape" && teamModal) {
+        setTeamModal(false);
+      }
+    },
+    [setTeamModal, teamModal]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
+
   return (
     <>
       {teamModal ? (
-        <animated.div style={animation}>
-          <StyledModal></StyledModal>
-        </animated.div>
+        <Background onClick={closeModal} ref={modalRef}>
+          <animated.div style={animation}>
+            <StyledModal></StyledModal>
+          </animated.div>
+        </Background>
       ) : null}
     </>
   );

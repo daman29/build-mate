@@ -73,7 +73,7 @@ const Project = (props) => {
 
   return (
     <CenterContainer>
-      {teamModal && <TeamModal teamModal={teamModal} showTeamModal={setTeamModal} teamData={teamData}/>}
+      {teamModal && <TeamModal teamModal={teamModal} setTeamModal={setTeamModal} teamData={teamData}/>}
       <DashboardCard>
         <h3>{projectData.project.name}</h3>
         <p>
