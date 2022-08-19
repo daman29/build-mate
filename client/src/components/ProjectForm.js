@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import {} from "../utils/mutations";
+import { ADD_PROJECT } from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
@@ -20,6 +21,8 @@ import {
 
 const ProjectForm = () => {
   const user = Auth.getProfile();
+  const [addProject, { data }] = useMutation(ADD_PROJECT);
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     name: "",
     address: "",
@@ -38,8 +41,6 @@ const ProjectForm = () => {
     const { name, value } = event.target;
 
     if (name === "councilApproval") {
-      console.log("approval clicked");
-
       setFormState({
         ...formState,
         [name]: !formState.councilApproval,
@@ -55,10 +56,15 @@ const ProjectForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    // try {
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    try {
+      const { data } = await addProject({
+        variables: { ...formState },
+      });
+      // console.log(data)
+      navigate(`/project/${data.addProject.project._id}`)
+    } catch (e) {
+      console.error(e);
+    }
 
     // clear form values
     setFormState({

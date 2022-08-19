@@ -91,7 +91,7 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, args, context) => {
-      
+
       if (!context.user) {
         throw new AuthenticationError(
           "Please login before creating new project"
@@ -102,13 +102,17 @@ const resolvers = {
       const project = await Project.create({ ...args });
       console.log(project);
 
-      const tasks = taskGenerator(
+      const tasksGenerated = taskGenerator(
         project.startDate,
         project._id,
         project.councilApproval,
         project.storeys,
         project.structure
       );
+
+      const tasks = await Task.create(tasksGenerated)
+
+      console.log(tasks)
 
       return { project, tasks };
     },
