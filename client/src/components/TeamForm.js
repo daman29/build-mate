@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import {} from "../utils/mutations";
+import { } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";

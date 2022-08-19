@@ -91,6 +91,7 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, args, context) => {
+      
       if (!context.user) {
         throw new AuthenticationError(
           "Please login before creating new project"
