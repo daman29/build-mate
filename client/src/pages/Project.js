@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import {
@@ -7,19 +8,20 @@ import {
   Selection,
   Inject,
 } from "@syncfusion/ej2-react-gantt";
+import TeamModal from "../components/TeamModal";
+import TaskModal from "../components/TaskModal";
 
 import { QUERY_PROJECT, QUERY_TEAM } from "../utils/queries";
 import { CenterContainer } from "../styles/Container.styled";
 import { DashboardCard } from "../styles/Card.styled";
 import { ProjectButton } from "../styles/Button.styled";
 import { GanttFlex } from "../styles/Gantt.styled";
-import { useState } from "react";
 
 const Project = (props) => {
   props.setMinimalSize(true);
 
-  const [teamModal, setTeamModal] = useState(false)
-  const [projectModal, setProjectModal] = useState(false)
+  const [teamModal, setTeamModal] = useState(false);
+  const [projectModal, setProjectModal] = useState(false);
 
   const { projectId } = useParams();
 
@@ -65,10 +67,13 @@ const Project = (props) => {
 
   const assignTeammate = (args) => {
     console.log(args.data.taskData._id);
+
+    setTeamModal(!teamModal);
   };
 
   return (
     <CenterContainer>
+      {teamModal && <TeamModal teamModal={teamModal} showTeamModal={setTeamModal} teamData={teamData}/>}
       <DashboardCard>
         <h3>{projectData.project.name}</h3>
         <p>
