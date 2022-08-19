@@ -78,3 +78,11 @@ export const ADD_PROJECT = gql`
     }
   }
 `;
+
+export const ASSIGN_TEAMMATE = gql`
+  mutation assignTeammate($taskId: ID!, $assigneeId: ID!){
+    assignTeammate(taskId: $taskId, assigneeId: $assigneeId){
+      name
+    }
+  }
+`

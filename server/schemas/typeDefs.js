@@ -102,6 +102,7 @@ const typeDefs = gql`
       email: String
       teamLeadId: ID!
     ): Profile
+    assignTeammate(taskId: ID!, assigneeId: ID!): Task
   }
 `;
 

@@ -19,7 +19,9 @@ const resolvers = {
         const project = await Project.findById(_id).populate("owner");
         const tasks = await Task.find({
           projectId: _id,
-        }).populate('assigneeId').sort({startDate: 1});
+        })
+          .populate("assigneeId")
+          .sort({ startDate: 1 });
 
         if (!project) {
           throw new AuthenticationError("No Project with the given ID");
@@ -91,7 +93,6 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, args, context) => {
-
       if (!context.user) {
         throw new AuthenticationError(
           "Please login before creating new project"
@@ -110,9 +111,9 @@ const resolvers = {
         project.structure
       );
 
-      const tasks = await Task.create(tasksGenerated)
+      const tasks = await Task.create(tasksGenerated);
 
-      console.log(tasks)
+      console.log(tasks);
 
       return { project, tasks };
     },
@@ -131,6 +132,29 @@ const resolvers = {
       const team = await Teammate.find({ teamLeadId: user._id });
 
       return { user, projects, team };
+    },
+    assignTeammate: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError(
+          "Please login before editing the project"
+        );
+      }
+
+      const task = await Task.findByIdAndUpdate(
+        args.taskId,
+        {
+          assigneeId: args.assigneeId,
+        },
+        {
+          new: true,
+        }
+      );
+
+      if (!task) {
+        throw new Error("No task found by given Id");
+      }
+
+      return { task };
     },
   },
 };

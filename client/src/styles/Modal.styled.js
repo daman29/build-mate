@@ -25,6 +25,7 @@ export const StyledModal = styled.div`
   flex-direction: ${({ layout }) => layout || "row"};
   height: auto;
   min-height: 100px;
+  min-width: 80vw;
   width: 80%;
   z-index: 99;
   @media (max-width: ${({ theme }) => theme.mobile}) {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { ASSIGN_TEAMMATE } from "../utils/mutations";
 import {
   GanttComponent,
   ColumnDirective,
@@ -9,7 +10,6 @@ import {
   Inject,
 } from "@syncfusion/ej2-react-gantt";
 import TeamModal from "../components/TeamModal";
-import TaskModal from "../components/TaskModal";
 
 import { QUERY_PROJECT, QUERY_TEAM } from "../utils/queries";
 import { CenterContainer } from "../styles/Container.styled";
@@ -22,8 +22,11 @@ const Project = (props) => {
 
   const [teamModal, setTeamModal] = useState(false);
   const [projectModal, setProjectModal] = useState(false);
+  const [currentTask, setCurrentTask] = useState("");
 
   const { projectId } = useParams();
+
+  const [assignTeammate, { data: mutationData }] = useMutation(ASSIGN_TEAMMATE);
 
   const { loading, data } = useQuery(QUERY_PROJECT, {
     variables: { project: projectId },
@@ -65,15 +68,33 @@ const Project = (props) => {
     timelineViewMode: "Month",
   };
 
-  const assignTeammate = (args) => {
-    console.log(args.data.taskData._id);
+  const handleAssignClick = async (teamId) => {
+    try {
+      console.log(currentTask, teamId);
+      const { mutationData } = await assignTeammate({
+        variables: { taskId: currentTask, assigneeId: teamId },
+      });
+      // window.location.reload()
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  const openModal = (args) => {
+    setCurrentTask(args.data.taskData._id);
     setTeamModal(!teamModal);
   };
 
   return (
     <CenterContainer>
-      {teamModal && <TeamModal teamModal={teamModal} setTeamModal={setTeamModal} teamData={teamData}/>}
+      {teamModal && (
+        <TeamModal
+          teamModal={teamModal}
+          setTeamModal={setTeamModal}
+          teamData={teamData}
+          handleAssignClick={handleAssignClick}
+        />
+      )}
       <DashboardCard>
         <h3>{projectData.project.name}</h3>
         <p>
@@ -94,7 +115,7 @@ const Project = (props) => {
           width="100%"
           taskFields={taskFields}
           timelineSettings={timelineSettings}
-          rowSelected={assignTeammate}
+          rowSelected={openModal}
         >
           <Inject services={[Selection]}></Inject>
           <ColumnsDirective>

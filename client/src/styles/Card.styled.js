@@ -80,9 +80,11 @@ export const TeammateCard = styled(ProjectCard)`
     width: 100%;
     flex: 0;
   }
+  /* min-width: ${({modal}) => modal? "" : 0}; */
   @media (max-width: ${({ theme }) => theme.mobile}) {
     flex-direction: column;
     flex-wrap: wrap;
     max-height: none;
   }
 `;
+

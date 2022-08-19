@@ -3,27 +3,36 @@ import { ProjectButton } from "../styles/Button.styled";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const TeammateCardComponent = ({ teammate }) => {
+const TeammateCardComponent = ({ teammate, modal, handleAssignClick }) => {
   return (
     <TeammateCard>
       <h5>{teammate.role}</h5>
       <div>
         <h6>{teammate.name}</h6>
-        <Link to="/home">
-          <ProjectButton bg={({ theme }) => theme.colors.orange}>
-            <FaPhone />
+
+        {modal ? (
+          <ProjectButton bg={({ theme }) => theme.colors.midBlue} onClick={() => handleAssignClick(teammate._id)}>
+            Assign
           </ProjectButton>
-        </Link>
-        <Link to="/home">
-          <ProjectButton bg={({ theme }) => theme.colors.orange}>
-            <FaEnvelope />
-          </ProjectButton>
-        </Link>
-        <Link to="/home">
-          <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
-            Edit
-          </ProjectButton>
-        </Link>
+        ) : (
+          <>
+            <Link to="/home">
+              <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                <FaPhone />
+              </ProjectButton>
+            </Link>
+            <Link to="/home">
+              <ProjectButton bg={({ theme }) => theme.colors.orange}>
+                <FaEnvelope />
+              </ProjectButton>
+            </Link>
+            <Link to="/home">
+              <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
+                Edit
+              </ProjectButton>
+            </Link>
+          </>
+        )}
       </div>
     </TeammateCard>
   );

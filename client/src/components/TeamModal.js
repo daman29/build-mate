@@ -2,7 +2,9 @@ import { Background, StyledModal } from "../styles/Modal.styled";
 import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 
-const TeamModal = ({ teamModal, setTeamModal, teamData }) => {
+import TeammateCardComponent from "./TeammateCardComponent";
+
+const TeamModal = ({ teamModal, setTeamModal, teamData, handleAssignClick }) => {
   const modalRef = useRef();
 
   const animation = useSpring({
@@ -38,7 +40,11 @@ const TeamModal = ({ teamModal, setTeamModal, teamData }) => {
       {teamModal ? (
         <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <StyledModal></StyledModal>
+            <StyledModal>
+              {teamData ? teamData.map((teammate) => (
+                <TeammateCardComponent key={teammate._id} teammate={teammate} modal={true} handleAssignClick={handleAssignClick}/>
+              )) : <h6>Please add your team members to assign to tasks</h6>}
+            </StyledModal>
           </animated.div>
         </Background>
       ) : null}
