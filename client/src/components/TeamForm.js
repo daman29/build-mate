@@ -12,9 +12,7 @@ import {
   SForm,
   SFormControl,
   SInput,
-  SInputWrap,
   SLabel,
-  SRange,
   SSelect,
 } from "../styles/FormStyle";
 
