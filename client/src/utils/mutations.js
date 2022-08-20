@@ -92,7 +92,7 @@ export const ADD_TASK = gql`
     $name: String!
     $description: String
     $startDate: String!
-    $endDate: String!
+    $duration: Int!
     $projectId: ID!
     $assigneeId: ID
   ) {
@@ -100,7 +100,7 @@ export const ADD_TASK = gql`
       name: $name
       description: $description
       startDate: $startDate
-      endDate: $endDate
+      duration: $duration
       projectId: $projectId
       assigneeId: $assigneeId
     ) {

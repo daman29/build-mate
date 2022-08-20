@@ -164,11 +164,23 @@ const resolvers = {
       }
       const project = await Project.findById(args.projectId);
 
-      if(project.startDate > args.startDate){
-        throw new Error("Start date of this task can not be earlier than the project")
+      if (project.startDate > args.startDate) {
+        throw new Error(
+          "Start date of this task can not be earlier than the project"
+        );
       }
 
-      const task = await Task.create({ ...args });
+      const endDate = new Date(args.startDate);
+      endDate.setDate(endDate.getDate() + args.duration * 7);
+
+      const task = await Task.create({
+        name: args.name,
+        description: args.description,
+        startDate: args.startDate,
+        endDate: endDate,
+        projectId: args.projectId,
+        assigneeId: args.assigneeId,
+      });
 
       return { task };
     },

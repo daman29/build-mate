@@ -45,6 +45,11 @@ const ProjectForm = () => {
         ...formState,
         [name]: !formState.councilApproval,
       });
+    } else if (name === "storeys") {
+      setFormState({
+        ...formState,
+        [name]: parseInt(value),
+      });
     } else {
       setFormState({
         ...formState,
@@ -56,12 +61,16 @@ const ProjectForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+    setFormState({
+      ...formState,
+      storeys: parseInt(formState.storeys),
+    });
     try {
       const { data } = await addProject({
         variables: { ...formState },
       });
       // console.log(data)
-      navigate(`/project/${data.addProject.project._id}`)
+      navigate(`/project/${data.addProject.project._id}`);
     } catch (e) {
       console.error(e);
     }

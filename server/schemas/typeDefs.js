@@ -88,7 +88,7 @@ const typeDefs = gql`
       name: String!
       description: String
       startDate: String!
-      endDate: String!
+      duration: Int!
       predecessor: ID
       successor: ID
       projectId: ID!

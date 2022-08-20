@@ -14,6 +14,7 @@ import {
   SInput,
   SLabel,
   SSelect,
+  SRange,
 } from "../styles/FormStyle";
 
 const TaskForm = ({ projectName, projectId }) => {
@@ -24,7 +25,7 @@ const TaskForm = ({ projectName, projectId }) => {
     name: "",
     description: "",
     startDate: "",
-    endDate: "",
+    duration: 1,
     projectId: projectId,
     assigneeId: null,
   });
@@ -33,10 +34,18 @@ const TaskForm = ({ projectName, projectId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    if(name === 'duration'){
+      setFormState({
+        ...formState,
+        [name]: parseInt(value),
+      });
+    } else{
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    }
+    
   };
 
   const handleFormSubmit = async (event) => {
@@ -57,7 +66,7 @@ const TaskForm = ({ projectName, projectId }) => {
       name: "",
       description: "",
       startDate: "",
-      endDate: "",
+      duration: 1,
       projectId: "",
       assigneeId: null,
     });
@@ -108,11 +117,13 @@ const TaskForm = ({ projectName, projectId }) => {
             />
           </SFormControl>
           <SFormControl>
-            <SLabel>End Date:</SLabel>
-            <SInput
-              name="endDate"
-              type="date"
-              value={formState.endDate}
+            <SLabel>Duration (weeks):</SLabel>
+            <SRange
+              name="duration"
+              type="number"
+              min="1"
+              max="30"
+              value={formState.duration}
               onChange={handleChange}
             />
           </SFormControl>
