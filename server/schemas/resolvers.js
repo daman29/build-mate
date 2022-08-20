@@ -120,7 +120,7 @@ const resolvers = {
     addTeam: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError(
-          "Please login before creating new project"
+          "Please login before creating a new team member"
         );
       }
       args.teamLeadId = context.user._id;
@@ -153,6 +153,22 @@ const resolvers = {
       if (!task) {
         throw new Error("No task found by given Id");
       }
+
+      return { task };
+    },
+    addTask: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError(
+          "Please login before adding a task to the project"
+        );
+      }
+      const project = await Project.findById(args.projectId);
+
+      if(project.startDate > args.startDate){
+        throw new Error("Start date of this task can not be earlier than the project")
+      }
+
+      const task = await Task.create({ ...args });
 
       return { task };
     },

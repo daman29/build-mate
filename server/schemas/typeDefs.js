@@ -94,7 +94,7 @@ const typeDefs = gql`
       projectId: ID!
       assigneeId: ID
       priority: String
-    ): FullProject
+    ): Task
     addTeam(
       name: String!
       role: String!

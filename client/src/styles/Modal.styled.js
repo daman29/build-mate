@@ -17,6 +17,7 @@ export const Background = styled.div`
 export const StyledModal = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.body};
   border-radius: 15px;
   box-shadow: 0 0 5000px ${({ theme }) => theme.colors.textFade};

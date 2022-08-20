@@ -10,6 +10,7 @@ import {
   Inject,
 } from "@syncfusion/ej2-react-gantt";
 import TeamModal from "../components/TeamModal";
+import TaskModal from "../components/TaskModal";
 
 import { QUERY_PROJECT, QUERY_TEAM } from "../utils/queries";
 import { CenterContainer } from "../styles/Container.styled";
@@ -21,7 +22,7 @@ const Project = (props) => {
   props.setMinimalSize(true);
 
   const [teamModal, setTeamModal] = useState(false);
-  const [projectModal, setProjectModal] = useState(false);
+  const [taskModal, setTaskModal] = useState(false);
   const [currentTask, setCurrentTask] = useState("");
 
   const { projectId } = useParams();
@@ -74,7 +75,7 @@ const Project = (props) => {
       const { mutationData } = await assignTeammate({
         variables: { taskId: currentTask, assigneeId: teamId },
       });
-      // window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -95,17 +96,24 @@ const Project = (props) => {
           handleAssignClick={handleAssignClick}
         />
       )}
+      {taskModal && (
+        <TaskModal
+          taskModal={taskModal}
+          setTaskModal={setTaskModal}
+          projectName={projectData.project.name}
+          projectId={projectData.project._id}
+        />
+      )}
       <DashboardCard>
         <h3>{projectData.project.name}</h3>
         <p>
-          Address: {projectData.project.address}{" "}
-          <Link
-            to={`/new-task/${projectData.project.name}/${projectData.project._id}`}
+          Address: {projectData.project.address}
+          <ProjectButton
+            bg={({ theme }) => theme.colors.lightBlue}
+            onClick={() => setTaskModal(true)}
           >
-            <ProjectButton bg={({ theme }) => theme.colors.lightBlue}>
-              Add Task
-            </ProjectButton>
-          </Link>
+            Add Task
+          </ProjectButton>
         </p>
       </DashboardCard>
       <GanttFlex>

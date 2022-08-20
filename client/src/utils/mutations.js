@@ -80,9 +80,31 @@ export const ADD_PROJECT = gql`
 `;
 
 export const ASSIGN_TEAMMATE = gql`
-  mutation assignTeammate($taskId: ID!, $assigneeId: ID!){
-    assignTeammate(taskId: $taskId, assigneeId: $assigneeId){
+  mutation assignTeammate($taskId: ID!, $assigneeId: ID!) {
+    assignTeammate(taskId: $taskId, assigneeId: $assigneeId) {
       name
     }
   }
-`
+`;
+
+export const ADD_TASK = gql`
+  mutation addTask(
+    $name: String!
+    $description: String
+    $startDate: String!
+    $endDate: String!
+    $projectId: ID!
+    $assigneeId: ID
+  ) {
+    addTask(
+      name: $name
+      description: $description
+      startDate: $startDate
+      endDate: $endDate
+      projectId: $projectId
+      assigneeId: $assigneeId
+    ) {
+      name
+    }
+  }
+`;
