@@ -154,7 +154,7 @@ const ProjectForm = () => {
             </SFormControl>
             <SFormControl>
               <SLabel>
-                {formState.storeys === "2"
+                {formState.storeys === 2
                   ? "Wall Type First Storey:"
                   : "Wall Type:"}
               </SLabel>
@@ -168,7 +168,7 @@ const ProjectForm = () => {
                 <option value="Double brick">Double brick</option>
               </SSelect>
             </SFormControl>
-            {formState.storeys === "2" && (
+            {formState.storeys === 2 && (
               <SFormControl>
                 <SLabel>Wall Type Second Storey:</SLabel>
                 <SSelect
