@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { registerLicense } from "@syncfusion/ej2-base";
 import {
@@ -86,13 +86,34 @@ function App() {
   const [themeIcon, setThemeIcon] = useState(<>&#9788;</>);
   const [minimalSize, setMinimalSize] = useState(false);
 
+  const savedTheme = JSON.parse(localStorage.getItem("theme"));
+
+  useEffect(() => {
+    if (savedTheme) {
+      setTheme(savedTheme.theme);
+      setThemeIcon(savedTheme.themeIcon.props.children);
+      console.log(savedTheme);
+    }
+  }, []);
+
   const toggleTheme = () => {
     if (theme === lightTheme) {
+      
       setTheme(darkTheme);
       setThemeIcon(<>&#9789;</>);
+      const themeObject = {
+        theme: darkTheme,
+        themeIcon: <>&#9789;</>,
+      };
+      window.localStorage.setItem("theme", JSON.stringify(themeObject));
     } else {
       setTheme(lightTheme);
       setThemeIcon(<>&#9788;</>);
+      const themeObject = {
+        theme: lightTheme,
+        themeIcon: <>&#9788;</>,
+      };
+      window.localStorage.setItem("theme", JSON.stringify(themeObject));
     }
   };
 
@@ -103,15 +124,9 @@ function App() {
         <Router>
           <GlobalContainer>
             {minimalSize ? (
-              <HeaderMinimal
-                toggleTheme={toggleTheme}
-                themeIcon={themeIcon}
-              />
+              <HeaderMinimal toggleTheme={toggleTheme} themeIcon={themeIcon} />
             ) : (
-              <Header
-                toggleTheme={toggleTheme}
-                themeIcon={themeIcon}
-              />
+              <Header toggleTheme={toggleTheme} themeIcon={themeIcon} />
             )}
 
             <Routes>
