@@ -2,13 +2,13 @@ import React from "react";
 
 import { Logo, Nav, StyledHeaderMinimal } from "../styles/Header.styled";
 import { Container } from "../styles/Container.styled";
-import { Button, MinimalButton } from "../styles/Button.styled";
-import logo from '../images/logo2.svg'
+import { MinimalButton, ThemeButton } from "../styles/Button.styled";
+import logo from "../images/logo2.svg";
 
 import Auth from "../utils/auth";
 import { Link, useLocation } from "react-router-dom";
 
-const HeaderMinimal = () => {
+const HeaderMinimal = ({ toggleTheme, themeIcon }) => {
   const location = useLocation().pathname;
   const logout = (event) => {
     event.preventDefault();
@@ -20,15 +20,24 @@ const HeaderMinimal = () => {
       {Auth.loggedIn() ? (
         <Container>
           <Nav>
-            <Logo src={logo}/>
+            <Logo src={logo} />
             {location === "/dashboard" ? (
-              <MinimalButton onClick={(e) => logout(e)} bg={({theme}) => theme.colors.yellow}>Logout</MinimalButton>
+              <div>
+                <MinimalButton
+                  onClick={(e) => logout(e)}
+                  bg={({ theme }) => theme.colors.yellow}
+                >
+                  Logout
+                </MinimalButton>
+                <ThemeButton onClick={() => toggleTheme()}>{themeIcon}</ThemeButton>
+              </div>
             ) : (
               <div>
                 <Link to="/dashboard">
                   <MinimalButton>Dashboard</MinimalButton>
                 </Link>
                 <MinimalButton onClick={(e) => logout(e)}>Logout</MinimalButton>
+                <ThemeButton onClick={() => toggleTheme()}>{themeIcon}</ThemeButton>
               </div>
             )}
           </Nav>
@@ -36,10 +45,13 @@ const HeaderMinimal = () => {
       ) : (
         <Container>
           <Nav>
-          <Logo src={logo}/>
-            <Link to="/">
-              <MinimalButton>Home</MinimalButton>
-            </Link>
+            <Logo src={logo} />
+            <div>
+              <Link to="/">
+                <MinimalButton>Home</MinimalButton>
+              </Link>
+              <ThemeButton onClick={() => toggleTheme()}>{themeIcon}</ThemeButton>
+            </div>
           </Nav>
         </Container>
       )}

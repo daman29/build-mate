@@ -69,9 +69,9 @@ const lightTheme = {
 
 const darkTheme = {
   colors: {
-    body: "gray",
+    body: "#0f0f0f",
     color: "white",
-    lightBlue: "#8ECAE6",
+    lightBlue: "#6e818a",
     yellow: "#FFB703",
     darkBlue: "#023047",
     orange: "#FB8500",
@@ -83,7 +83,18 @@ const darkTheme = {
 
 function App() {
   const [theme, setTheme] = useState(lightTheme);
+  const [themeIcon, setThemeIcon] = useState(<>&#9788;</>);
   const [minimalSize, setMinimalSize] = useState(false);
+
+  const toggleTheme = () => {
+    if (theme === lightTheme) {
+      setTheme(darkTheme);
+      setThemeIcon(<>&#9789;</>);
+    } else {
+      setTheme(lightTheme);
+      setThemeIcon(<>&#9788;</>);
+    }
+  };
 
   return (
     <ApolloProvider client={client}>
@@ -92,9 +103,15 @@ function App() {
         <Router>
           <GlobalContainer>
             {minimalSize ? (
-              <HeaderMinimal theme={theme} />
+              <HeaderMinimal
+                toggleTheme={toggleTheme}
+                themeIcon={themeIcon}
+              />
             ) : (
-              <Header theme={theme} />
+              <Header
+                toggleTheme={toggleTheme}
+                themeIcon={themeIcon}
+              />
             )}
 
             <Routes>

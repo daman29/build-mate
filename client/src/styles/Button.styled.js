@@ -24,3 +24,10 @@ export const ProjectButton = styled(Button)`
 export const MinimalButton = styled(Button)`
   padding: 10px 30px;
 `;
+
+export const ThemeButton = styled.button`
+  background-color: none;
+  border: none;
+  background: none;
+  color: ${({ color }) => color || "#333"};
+`;
