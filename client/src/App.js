@@ -27,6 +27,8 @@ import NewProject from "./pages/NewProject";
 import NewTask from "./pages/NewTask";
 import NewTeam from "./pages/NewTeam";
 import Project from "./pages/Project";
+import EditProject from "./pages/EditProject";
+import EditTeammate from "./pages/EditTeammate";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -130,6 +132,14 @@ function App() {
                   <Route
                     path="/project/:projectId"
                     element={<Project setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/edit-project/:projectId"
+                    element={<EditProject setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/edit-teammate/:teammateId"
+                    element={<EditTeammate setMinimalSize={setMinimalSize} />}
                   />
                 </>
               )}

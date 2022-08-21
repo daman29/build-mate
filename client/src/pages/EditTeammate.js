@@ -1,14 +1,14 @@
 import React from "react";
-import ProjectForm from "../components/ProjectForm";
+import TeamForm from "../components/TeamForm";
 import { CenterContainer } from "../styles/Container.styled";
 
-const NewProject = (props) => {
+const EditTeammate = (props) => {
   props.setMinimalSize(true);
   return (
     <CenterContainer>
-      <ProjectForm />
+      <TeamForm />
     </CenterContainer>
   );
 };
 
-export default NewProject;
+export default EditTeammate;

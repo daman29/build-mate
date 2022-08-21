@@ -8,21 +8,18 @@ const SSpan = styled.span`
 `;
 
 const ProjectCardComponent = ({ project }) => {
-  const projectLink = "/project/" + project._id;
-  const editLink = "/edit-project/" + project._id;
-
   return (
     <ProjectCard>
       <h5>
         {project.name} <SSpan>{project.address}</SSpan>
       </h5>
       <div>
-        <Link to={projectLink}>
+        <Link to={`/project/${project._id}`}>
           <ProjectButton bg={({ theme }) => theme.colors.orange}>
             Open
           </ProjectButton>
         </Link>
-        <Link to={editLink}>
+        <Link to={`/edit-project/${project._id}`}>
           <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
             Edit
           </ProjectButton>
