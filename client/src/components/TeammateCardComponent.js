@@ -16,16 +16,16 @@ const TeammateCardComponent = ({ teammate, modal, handleAssignClick }) => {
           </ProjectButton>
         ) : (
           <>
-            <Link to="/home">
+            <a href={`tel:${teammate.phoneNumber}`}>
               <ProjectButton bg={({ theme }) => theme.colors.orange}>
                 <FaPhone />
               </ProjectButton>
-            </Link>
-            <Link to="/home">
+            </a>
+            <a href={`mailto:${teammate.email}`}>
               <ProjectButton bg={({ theme }) => theme.colors.orange}>
                 <FaEnvelope />
               </ProjectButton>
-            </Link>
+            </a>
             <Link to="/home">
               <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
                 Edit
