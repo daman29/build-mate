@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TEAM } from "../utils/mutations";
-import { useNavigate } from "react-router-dom";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
 import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
+import { validateEmail, checkNumber } from "../utils/helpers";
 
 import {
   SButton,
@@ -19,8 +19,8 @@ import {
 
 const TeamForm = () => {
   const user = Auth.getProfile();
-  const navigate = useNavigate();
   const [addTeam, { data, error }] = useMutation(ADD_TEAM);
+  const [inputError, setInputError] = useState("");
   const [formState, setFormState] = useState({
     name: "",
     role: "Bricky",
@@ -42,11 +42,17 @@ const TeamForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+
+    if (!checkNumber(formState.phoneNumber)) {
+      setInputError("Please check that the phone number is valid");
+      return;
+    }
+
     try {
       const { data } = await addTeam({
         variables: { ...formState },
       });
-      window.location.replace('/dashboard')
+      window.location.replace("/dashboard");
     } catch (e) {
       console.error(e);
     }
@@ -78,6 +84,7 @@ const TeamForm = () => {
                 type="text"
                 value={formState.name}
                 onChange={handleChange}
+                required
               />
             </SFormControl>
             <SFormControl>
@@ -86,6 +93,7 @@ const TeamForm = () => {
                 name="role"
                 value={formState.role}
                 onChange={handleChange}
+                required
               >
                 <option value="Bricky">Bricky</option>
                 <option value="Sparky">Sparky</option>
@@ -115,6 +123,7 @@ const TeamForm = () => {
                 type="text"
                 value={formState.phoneNumber}
                 onChange={handleChange}
+                required
               />
             </SFormControl>
             <SFormControl>
@@ -131,10 +140,15 @@ const TeamForm = () => {
             <SButton type="button" onClick={handleFormSubmit}>
               Submit
             </SButton>
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
+            {inputError && (
+              <div className="my-3 p-3 bg-danger text-white">{inputError}</div>
+            )}
           </SForm>
-          {error && (
-            <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-          )}
         </FormCard>
       </Flex>
     </CenterContainer>

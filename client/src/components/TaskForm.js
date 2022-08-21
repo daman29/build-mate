@@ -92,6 +92,7 @@ const TaskForm = ({ projectName, projectId }) => {
               type="text"
               value={formState.name}
               onChange={handleChange}
+              required
             />
           </SFormControl>
           <SFormControl>
@@ -111,6 +112,7 @@ const TaskForm = ({ projectName, projectId }) => {
               type="date"
               value={formState.startDate}
               onChange={handleChange}
+              required
             />
           </SFormControl>
           <SFormControl>
@@ -147,10 +149,10 @@ const TaskForm = ({ projectName, projectId }) => {
           <SButton type="button" onClick={handleFormSubmit}>
             Submit
           </SButton>
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+          )}
         </SForm>
-        {error && (
-          <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-        )}
       </FormCard>
     </Flex>
   );
