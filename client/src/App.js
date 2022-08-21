@@ -49,7 +49,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-registerLicense(process.env.REACT_APP_SYNCFUSION_LICENCE_KEY)
+registerLicense(process.env.REACT_APP_SYNCFUSION_LICENCE_KEY);
 
 const lightTheme = {
   colors: {
@@ -100,10 +100,7 @@ function App() {
                 path="/"
                 element={<Landing setMinimalSize={setMinimalSize} />}
               />
-              <Route
-                path="/dashboard"
-                element={<Dashboard setMinimalSize={setMinimalSize} />}
-              />
+
               <Route
                 path="/login"
                 element={<Login setMinimalSize={setMinimalSize} />}
@@ -112,22 +109,31 @@ function App() {
                 path="/signup"
                 element={<Signup setMinimalSize={setMinimalSize} />}
               />
-              <Route
-                path="/new-project"
-                element={<NewProject setMinimalSize={setMinimalSize} />}
-              />
-              <Route
-                path="/new-task/:projectName/:projectId"
-                element={<NewTask setMinimalSize={setMinimalSize} />}
-              />
-              <Route
-                path="/new-teammate"
-                element={<NewTeam setMinimalSize={setMinimalSize} />}
-              />
-              <Route
-                path="/project/:projectId"
-                element={<Project setMinimalSize={setMinimalSize} />}
-              />
+              {Auth.loggedIn() && (
+                <>
+                  <Route
+                    path="/dashboard"
+                    element={<Dashboard setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/new-project"
+                    element={<NewProject setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/new-task/:projectName/:projectId"
+                    element={<NewTask setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/new-teammate"
+                    element={<NewTeam setMinimalSize={setMinimalSize} />}
+                  />
+                  <Route
+                    path="/project/:projectId"
+                    element={<Project setMinimalSize={setMinimalSize} />}
+                  />
+                </>
+              )}
+
               <Route path="*" element={<NotFound />} />
             </Routes>
             {minimalSize ? (

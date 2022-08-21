@@ -1,12 +1,11 @@
 import React from 'react';
+import { CenterContainer } from '../styles/Container.styled';
 
 const NotFound = () => {
     return (
-        <>
-            <div>
-                Page not found
-            </div>
-        </>
+        <CenterContainer>
+                Page not found. Make sure you are logged in.
+        </CenterContainer>
     );
 };
 

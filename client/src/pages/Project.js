@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { ASSIGN_TEAMMATE } from "../utils/mutations";
 import {
@@ -36,6 +36,10 @@ const Project = (props) => {
   const { loading: loadingTeam, data: dataTeam } = useQuery(QUERY_TEAM);
 
   if (loading) {
+    return <h1>Loading ...</h1>;
+  }
+
+  if (loadingTeam) {
     return <h1>Loading ...</h1>;
   }
 

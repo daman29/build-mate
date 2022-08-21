@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_TASK } from "../utils/mutations";
 import { QUERY_TEAM } from "../utils/queries";
 
-import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
 import { FormCard } from "../styles/Card.styled";
 
@@ -18,9 +17,8 @@ import {
 } from "../styles/FormStyle";
 
 const TaskForm = ({ projectName, projectId }) => {
-  const user = Auth.getProfile();
   const { loading, data } = useQuery(QUERY_TEAM);
-  const [addTask, { data: taskData }] = useMutation(ADD_TASK);
+  const [addTask, { data: taskData, error }] = useMutation(ADD_TASK);
   const [formState, setFormState] = useState({
     name: "",
     description: "",
@@ -34,18 +32,17 @@ const TaskForm = ({ projectName, projectId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if(name === 'duration'){
+    if (name === "duration") {
       setFormState({
         ...formState,
         [name]: parseInt(value),
       });
-    } else{
+    } else {
       setFormState({
         ...formState,
         [name]: value,
       });
     }
-    
   };
 
   const handleFormSubmit = async (event) => {
@@ -151,9 +148,9 @@ const TaskForm = ({ projectName, projectId }) => {
             Submit
           </SButton>
         </SForm>
-        {/* {error && (
-            <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-          )} */}
+        {error && (
+          <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+        )}
       </FormCard>
     </Flex>
   );

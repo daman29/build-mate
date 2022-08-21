@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import { ADD_TEAM } from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
@@ -18,9 +19,11 @@ import {
 
 const TeamForm = () => {
   const user = Auth.getProfile();
+  const navigate = useNavigate();
+  const [addTeam, { data, error }] = useMutation(ADD_TEAM);
   const [formState, setFormState] = useState({
     name: "",
-    role: "",
+    role: "Bricky",
     phoneNumber: "",
     email: "",
     teamLeadId: user.data._id,
@@ -39,10 +42,14 @@ const TeamForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    // try {
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    try {
+      const { data } = await addTeam({
+        variables: { ...formState },
+      });
+      window.location.replace('/dashboard')
+    } catch (e) {
+      console.error(e);
+    }
 
     // clear form values
     setFormState({
@@ -125,9 +132,9 @@ const TeamForm = () => {
               Submit
             </SButton>
           </SForm>
-          {/* {error && (
+          {error && (
             <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-          )} */}
+          )}
         </FormCard>
       </Flex>
     </CenterContainer>

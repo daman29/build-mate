@@ -108,3 +108,33 @@ export const ADD_TASK = gql`
     }
   }
 `;
+
+export const ADD_TEAM = gql`
+  mutation addTeam(
+    $name: String!
+    $role: String!
+    $phoneNumber: String!
+    $email: String
+    $teamLeadId: ID!
+  ) {
+    addTeam(
+      name: $name
+      role: $role
+      phoneNumber: $phoneNumber
+      email: $email
+      teamLeadId: $teamLeadId
+    ) {
+      user {
+        _id
+        username
+      }
+      projects {
+        name
+      }
+      team {
+        name
+        role
+      }
+    }
+  }
+`;

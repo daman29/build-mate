@@ -13,7 +13,6 @@ import {
   SForm,
   SFormControl,
   SInput,
-  SInputWrap,
   SLabel,
   SRange,
   SSelect,
@@ -21,7 +20,7 @@ import {
 
 const ProjectForm = () => {
   const user = Auth.getProfile();
-  const [addProject, { data }] = useMutation(ADD_PROJECT);
+  const [addProject, { data, error }] = useMutation(ADD_PROJECT);
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     name: "",
@@ -209,9 +208,9 @@ const ProjectForm = () => {
               Submit
             </SButton>
           </SForm>
-          {/* {error && (
+          {error && (
             <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-          )} */}
+          )}
         </FormCard>
       </Flex>
     </CenterContainer>
