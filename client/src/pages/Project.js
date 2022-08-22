@@ -104,6 +104,25 @@ const Project = (props) => {
   const timelineSettings = {
     timelineViewMode: "Month",
   };
+  const toolbarOptions = [
+    "PdfExport",
+    "CsvExport",
+    "ExpandAll",
+    "CollapseAll",
+    { text: "Add Task", id: "add" },
+    { text: "Edit Task", id: "edit" },
+  ];
+  const editOptions = {
+    allowAdding: true,
+    allowEditing: true,
+    allowDeleting: true,
+  };
+
+  const toolbarBtnClick = (args) => {
+    if (args.item.id === "add") {
+      setTaskModal(true);
+    }
+  };
 
   const handleAssignClick = async (teamId) => {
     try {
@@ -184,8 +203,11 @@ const Project = (props) => {
           taskFields={taskFields}
           timelineSettings={timelineSettings}
           rowSelected={openModal}
-          toolbar={["PdfExport", "CsvExport"]}
+          toolbar={toolbarOptions}
+          toolbarClick={toolbarBtnClick}
           allowPdfExport={true}
+          allowExcelExport={true}
+          editSettings={editOptions}
         >
           <Inject services={[Selection, Toolbar, PdfExport]}></Inject>
           <ColumnsDirective>
