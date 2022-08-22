@@ -42,7 +42,7 @@ const Signup = ({setMinimalSize}) => {
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
+      Auth.signup(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -57,6 +57,7 @@ const Signup = ({setMinimalSize}) => {
         </div>
         <FormCard>
           <SForm>
+            <h3>Standard plan: $30 per month</h3>
             <SFormControl>
               <SLabel>Username:</SLabel>
               <SInput
@@ -88,7 +89,7 @@ const Signup = ({setMinimalSize}) => {
               />
             </SFormControl>
             <SButton type="button" onClick={handleFormSubmit}>
-              Submit
+              Pay
             </SButton>
           </SForm>
           {error && (

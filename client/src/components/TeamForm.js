@@ -4,9 +4,8 @@ import { ADD_TEAM } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 import { Flex } from "../styles/Flex.styled";
-import { CenterContainer } from "../styles/Container.styled";
 import { FormCard } from "../styles/Card.styled";
-import { validateEmail, checkNumber } from "../utils/helpers";
+import { checkNumber } from "../utils/helpers";
 
 import {
   SButton,

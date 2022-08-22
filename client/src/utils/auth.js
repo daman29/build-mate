@@ -31,6 +31,10 @@ class AuthService {
     localStorage.setItem('id_token', idToken);
     window.location.assign('/dashboard');
   }
+  signup(idToken) {
+    localStorage.setItem('id_token', idToken);
+    window.location.assign('https://buy.stripe.com/test_bIY9Dz7V6e6H97G3cc');
+  }
 
   logout() {
     localStorage.removeItem('id_token');

@@ -92,7 +92,6 @@ function App() {
     if (savedTheme) {
       setTheme(savedTheme.theme);
       setThemeIcon(savedTheme.themeIcon.props.children);
-      console.log(savedTheme);
     }
   }, []);
 
@@ -179,9 +178,9 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             {minimalSize ? (
-              <FooterMinimal theme={theme} />
+              <FooterMinimal />
             ) : (
-              <Footer theme={theme} />
+              <Footer />
             )}
           </GlobalContainer>
         </Router>

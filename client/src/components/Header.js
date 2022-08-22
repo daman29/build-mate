@@ -5,7 +5,7 @@ import { Container } from "../styles/Container.styled";
 import { Button, MinimalButton, ThemeButton } from "../styles/Button.styled";
 import { Flex } from "../styles/Flex.styled";
 
-import headerImage from "../images/header.jpg";
+import headerImage from "../images/header.webp";
 
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";

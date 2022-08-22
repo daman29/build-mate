@@ -1,6 +1,6 @@
-import projectImage from '../images/project.jpg'
-import teamImage from '../images/team.jpg'
-import repoImage from '../images/repo.jpg'
+import projectImage from '../images/project.webp'
+import teamImage from '../images/team.webp'
+import repoImage from '../images/repo.webp'
 
 const cardsContent = [
   {
