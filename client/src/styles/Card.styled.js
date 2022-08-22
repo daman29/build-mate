@@ -44,13 +44,25 @@ export const CategoryCard = styled(StyledCard)`
 `;
 
 export const DashboardCard = styled(CategoryCard)`
-  width: auto;
+  flex: 1 1 70%;
+  align-items: center;
   box-shadow: 0 0 10px ${({ theme }) => theme.colors.midBlue};
+  text-align: center;
+  & > p > span {
+    color: ${({ theme }) => theme.colors.midBlue};
+  }
+  & > h3 {
+    color: ${({ theme }) => theme.colors.textFade};
+  }
   @media (max-width: ${({ theme }) => theme.mobile}) {
     flex-direction: column;
+    flex: 1 1 100%;
     flex-wrap: wrap;
     max-height: none;
   }
+`;
+export const ProjectTeamCard = styled(DashboardCard)`
+  flex: 1 1 30%;
 `;
 
 export const ProjectCard = styled(CategoryCard)`
@@ -80,11 +92,10 @@ export const TeammateCard = styled(ProjectCard)`
     width: 100%;
     flex: 0;
   }
-  /* min-width: ${({modal}) => modal? "" : 0}; */
+  /* min-width: ${({ modal }) => (modal ? "" : 0)}; */
   @media (max-width: ${({ theme }) => theme.mobile}) {
     flex-direction: column;
     flex-wrap: wrap;
     max-height: none;
   }
 `;
-

@@ -10,10 +10,7 @@ import {
   LeftColumn,
   RightColumn,
 } from "../styles/Dashboard.styled";
-import {
-  CategoryCard,
-  DashboardCard,
-} from "../styles/Card.styled";
+import { CategoryCard, DashboardCard } from "../styles/Card.styled";
 import ProjectCardComponent from "../components/ProjectCardComponent";
 import Auth from "../utils/auth";
 import TeammateCardComponent from "../components/TeammateCardComponent";
@@ -22,7 +19,7 @@ import styled from "styled-components";
 
 const StyledHeading = styled.h2`
   text-align: center;
-`
+`;
 
 const Dashboard = ({ setMinimalSize }) => {
   const { loading, data } = useQuery(QUERY_DASHBOARD);
@@ -35,10 +32,11 @@ const Dashboard = ({ setMinimalSize }) => {
   const dashboardData = data?.profile;
   const user = Auth.getProfile();
 
-
   return (
     <CenterContainer>
-      <StyledHeading>Good Day {user.data.username}! Here is your dashboard.</StyledHeading>
+      <StyledHeading>
+        Good Day {user.data.username}! Here is your dashboard.
+      </StyledHeading>
       <FlexDashboard>
         <LeftColumn>
           <CategoryCard>
@@ -59,13 +57,27 @@ const Dashboard = ({ setMinimalSize }) => {
         </LeftColumn>
         <RightColumn>
           <DashboardCard>
-            <h4>Your Projects: <Link to="/new-project"><ProjectButton bg={({ theme }) => theme.colors.lightBlue}>New Project</ProjectButton></Link></h4> 
+            <h4>
+              Your Projects:{" "}
+              <Link to="/new-project">
+                <ProjectButton bg={({ theme }) => theme.colors.lightBlue}>
+                  New Project
+                </ProjectButton>
+              </Link>
+            </h4>
             {dashboardData.projects.map((project) => (
               <ProjectCardComponent key={project._id} project={project} />
             ))}
           </DashboardCard>
           <DashboardCard>
-            <h4>Your Team: <Link to="/new-teammate"><ProjectButton bg={({ theme }) => theme.colors.lightBlue}>New Teammate</ProjectButton></Link></h4>
+            <h4>
+              Your Team:{" "}
+              <Link to="/new-teammate">
+                <ProjectButton bg={({ theme }) => theme.colors.lightBlue}>
+                  New Teammate
+                </ProjectButton>
+              </Link>
+            </h4>
             {dashboardData.team.map((teammate) => (
               <TeammateCardComponent key={teammate._id} teammate={teammate} />
             ))}

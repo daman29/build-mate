@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { ASSIGN_TEAMMATE } from "../utils/mutations";
 import {
@@ -14,9 +14,10 @@ import TaskModal from "../components/TaskModal";
 
 import { QUERY_PROJECT, QUERY_TEAM } from "../utils/queries";
 import { CenterContainer } from "../styles/Container.styled";
-import { DashboardCard } from "../styles/Card.styled";
+import { DashboardCard, ProjectTeamCard } from "../styles/Card.styled";
 import { ProjectButton } from "../styles/Button.styled";
 import { GanttFlex } from "../styles/Gantt.styled";
+import { Flex, FlexDashboard } from "../styles/Flex.styled";
 
 const Project = (props) => {
   props.setMinimalSize(true);
@@ -44,8 +45,10 @@ const Project = (props) => {
   }
 
   const projectData = data?.project;
+  console.log(projectData);
   const teamData = dataTeam?.team;
 
+  const assignedTeammates = [];
   const ganttTasks = [];
 
   for (let i = 0; i < projectData.tasks.length; i++) {
@@ -56,10 +59,21 @@ const Project = (props) => {
       endDate: new Date(projectData.tasks[i].endDate * 1),
       owner: projectData.tasks[i].assigneeId?.name,
       _id: projectData.tasks[i]._id,
+      description: projectData.tasks[i].description,
     };
 
+    if (projectData.tasks[i].assigneeId) {
+      let teammate = {
+        name: projectData.tasks[i].assigneeId.name,
+        role: projectData.tasks[i].assigneeId.role,
+        phoneNumber: projectData.tasks[i].assigneeId.phoneNumber,
+      };
+      assignedTeammates.push(teammate);
+    }
     ganttTasks.push(taskObj);
   }
+
+  console.log(assignedTeammates);
 
   const taskFields = {
     id: "taskId",
@@ -68,6 +82,7 @@ const Project = (props) => {
     endDate: "endDate",
     owner: "owner",
     _id: "_id",
+    description: "description",
   };
   const timelineSettings = {
     timelineViewMode: "Month",
@@ -108,18 +123,43 @@ const Project = (props) => {
           projectId={projectData.project._id}
         />
       )}
-      <DashboardCard>
-        <h3>{projectData.project.name}</h3>
-        <p>
-          Address: {projectData.project.address}
-          <ProjectButton
-            bg={({ theme }) => theme.colors.lightBlue}
-            onClick={() => setTaskModal(true)}
-          >
-            Add Task
-          </ProjectButton>
-        </p>
-      </DashboardCard>
+      <FlexDashboard>
+        <DashboardCard>
+          <h3>
+            {projectData.project.name}{" "}
+            <ProjectButton
+              bg={({ theme }) => theme.colors.lightBlue}
+              onClick={() => setTaskModal(true)}
+            >
+              Add Task
+            </ProjectButton>
+          </h3>
+          <p>
+            Address: <span>{projectData.project.address}</span>
+          </p>
+          <p>
+            Structure: <span>{projectData.project.structure}</span>
+          </p>
+          <p>
+            Wall Type: <span>{projectData.project.wallType}</span>
+          </p>
+          <p>
+            Storeys: <span>{projectData.project.storeys}</span>
+          </p>
+        </DashboardCard>
+        {assignedTeammates.length > 0 && (
+          <ProjectTeamCard>
+            <h3>Project Team</h3>
+            {assignedTeammates.map((teammate) => (
+              <p>
+                {teammate.name} - <span>{teammate.role}</span> -{" "}
+                {teammate.phoneNumber}
+              </p>
+            ))}
+          </ProjectTeamCard>
+        )}
+      </FlexDashboard>
+
       <GanttFlex>
         <GanttComponent
           dataSource={ganttTasks}
@@ -144,17 +184,22 @@ const Project = (props) => {
             <ColumnDirective
               field="startDate"
               headerText="Start Date"
-              width="100"
+              width="120"
             ></ColumnDirective>
             <ColumnDirective
               field="endDate"
               headerText="End Date"
-              width="100"
+              width="120"
             ></ColumnDirective>
             <ColumnDirective
               field="owner"
-              headerText="Assigned Teammate"
-              width="200"
+              headerText="Assigned To"
+              width="120"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="description"
+              headerText="Description"
+              width="300"
             ></ColumnDirective>
           </ColumnsDirective>
         </GanttComponent>
