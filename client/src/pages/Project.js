@@ -8,6 +8,9 @@ import {
   ColumnsDirective,
   Selection,
   Inject,
+  Toolbar,
+  PdfExport,
+  toolbarClick,
 } from "@syncfusion/ej2-react-gantt";
 import TeamModal from "../components/TeamModal";
 import TaskModal from "../components/TaskModal";
@@ -104,7 +107,6 @@ const Project = (props) => {
     setCurrentTask(args.data.taskData._id);
     setTeamModal(!teamModal);
   };
-
   return (
     <CenterContainer>
       {teamModal && (
@@ -168,8 +170,10 @@ const Project = (props) => {
           taskFields={taskFields}
           timelineSettings={timelineSettings}
           rowSelected={openModal}
+          toolbar={["PdfExport", "CsvExport"]}
+          allowPdfExport={true}
         >
-          <Inject services={[Selection]}></Inject>
+          <Inject services={[Selection, Toolbar, PdfExport]}></Inject>
           <ColumnsDirective>
             <ColumnDirective
               field="taskId"
