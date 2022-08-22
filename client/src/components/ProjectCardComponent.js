@@ -7,7 +7,7 @@ const SSpan = styled.span`
   font-size: 0.6em;
 `;
 
-const ProjectCardComponent = ({ project }) => {
+const ProjectCardComponent = ({ project, setMissingFeature }) => {
   return (
     <ProjectCard>
       <h5>
@@ -19,11 +19,12 @@ const ProjectCardComponent = ({ project }) => {
             Open
           </ProjectButton>
         </Link>
-        <Link to={`/edit-project/${project._id}`}>
-          <ProjectButton bg={({ theme }) => theme.colors.midBlue}>
-            Edit
-          </ProjectButton>
-        </Link>
+        <ProjectButton
+          bg={({ theme }) => theme.colors.midBlue}
+          onClick={() => setMissingFeature(true)}
+        >
+          Edit
+        </ProjectButton>
       </div>
     </ProjectCard>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
@@ -16,6 +16,7 @@ import Auth from "../utils/auth";
 import TeammateCardComponent from "../components/TeammateCardComponent";
 import { ProjectButton } from "../styles/Button.styled";
 import styled from "styled-components";
+import MissingFeature from "../components/MissingFeature";
 
 const StyledHeading = styled.h2`
   text-align: center;
@@ -23,6 +24,7 @@ const StyledHeading = styled.h2`
 
 const Dashboard = ({ setMinimalSize }) => {
   const { loading, data } = useQuery(QUERY_DASHBOARD);
+  const [missingFeature, setMissingFeature] = useState(false);
   setMinimalSize(true);
 
   if (loading) {
@@ -34,6 +36,12 @@ const Dashboard = ({ setMinimalSize }) => {
 
   return (
     <CenterContainer>
+      {missingFeature && (
+        <MissingFeature
+          missingFeature={missingFeature}
+          setMissingFeature={setMissingFeature}
+        />
+      )}
       <StyledHeading>
         Good Day {user.data.username}! Here is your dashboard.
       </StyledHeading>
@@ -66,7 +74,11 @@ const Dashboard = ({ setMinimalSize }) => {
               </Link>
             </h4>
             {dashboardData.projects.map((project) => (
-              <ProjectCardComponent key={project._id} project={project} />
+              <ProjectCardComponent
+                key={project._id}
+                project={project}
+                setMissingFeature={setMissingFeature}
+              />
             ))}
           </DashboardCard>
           <DashboardCard>
@@ -79,7 +91,11 @@ const Dashboard = ({ setMinimalSize }) => {
               </Link>
             </h4>
             {dashboardData.team.map((teammate) => (
-              <TeammateCardComponent key={teammate._id} teammate={teammate} />
+              <TeammateCardComponent
+                key={teammate._id}
+                teammate={teammate}
+                setMissingFeature={setMissingFeature}
+              />
             ))}
           </DashboardCard>
         </RightColumn>

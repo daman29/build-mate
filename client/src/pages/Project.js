@@ -20,13 +20,15 @@ import { CenterContainer } from "../styles/Container.styled";
 import { DashboardCard, ProjectTeamCard } from "../styles/Card.styled";
 import { ProjectButton } from "../styles/Button.styled";
 import { GanttFlex } from "../styles/Gantt.styled";
-import { Flex, FlexDashboard } from "../styles/Flex.styled";
+import { FlexDashboard } from "../styles/Flex.styled";
+import MissingFeature from "../components/MissingFeature";
 
 const Project = (props) => {
   props.setMinimalSize(true);
 
   const [teamModal, setTeamModal] = useState(false);
   const [taskModal, setTaskModal] = useState(false);
+  const [missingFeature, setMissingFeature] = useState(false);
   const [currentTask, setCurrentTask] = useState("");
 
   const { projectId } = useParams();
@@ -121,6 +123,8 @@ const Project = (props) => {
   const toolbarBtnClick = (args) => {
     if (args.item.id === "add") {
       setTaskModal(true);
+    }else{
+      setMissingFeature(true)
     }
   };
 
@@ -142,6 +146,12 @@ const Project = (props) => {
   };
   return (
     <CenterContainer>
+      {missingFeature && (
+        <MissingFeature
+          missingFeature={missingFeature}
+          setMissingFeature={setMissingFeature}
+        />
+      )}
       {teamModal && (
         <TeamModal
           teamModal={teamModal}
