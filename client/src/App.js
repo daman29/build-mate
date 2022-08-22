@@ -12,14 +12,14 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import { GlobalContainer } from "./styles/GlobalContainer.styled";
 
+import auth from "./utils/auth";
+
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
 import Header from "./components/Header";
 import HeaderMinimal from "./components/HeaderMinimal";
-import Auth from "./utils/auth";
 import Landing from "./pages/Landing";
 import Footer from "./components/Footer";
 import FooterMinimal from "./components/FooterMinimal";
@@ -29,6 +29,7 @@ import NewTeam from "./pages/NewTeam";
 import Project from "./pages/Project";
 import EditProject from "./pages/EditProject";
 import EditTeammate from "./pages/EditTeammate";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -97,7 +98,6 @@ function App() {
 
   const toggleTheme = () => {
     if (theme === lightTheme) {
-      
       setTheme(darkTheme);
       setThemeIcon(<>&#9789;</>);
       const themeObject = {
@@ -142,46 +142,42 @@ function App() {
                 path="/signup"
                 element={<Signup setMinimalSize={setMinimalSize} />}
               />
-              {Auth.loggedIn() && (
-                <>
-                  <Route
-                    path="/dashboard"
-                    element={<Dashboard setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/new-project"
-                    element={<NewProject setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/new-task/:projectName/:projectId"
-                    element={<NewTask setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/new-teammate"
-                    element={<NewTeam setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/project/:projectId"
-                    element={<Project setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/edit-project/:projectId"
-                    element={<EditProject setMinimalSize={setMinimalSize} />}
-                  />
-                  <Route
-                    path="/edit-teammate/:teammateId"
-                    element={<EditTeammate setMinimalSize={setMinimalSize} />}
-                  />
-                </>
-              )}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute isLoggedIn={auth.loggedIn()}>
+                    <Dashboard setMinimalSize={setMinimalSize} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/new-project"
+                element={<NewProject setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/new-task/:projectName/:projectId"
+                element={<NewTask setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/new-teammate"
+                element={<NewTeam setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/project/:projectId"
+                element={<Project setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/edit-project/:projectId"
+                element={<EditProject setMinimalSize={setMinimalSize} />}
+              />
+              <Route
+                path="/edit-teammate/:teammateId"
+                element={<EditTeammate setMinimalSize={setMinimalSize} />}
+              />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
-            {minimalSize ? (
-              <FooterMinimal />
-            ) : (
-              <Footer />
-            )}
+            {minimalSize ? <FooterMinimal /> : <Footer />}
           </GlobalContainer>
         </Router>
       </ThemeProvider>
