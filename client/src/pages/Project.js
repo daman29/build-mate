@@ -54,6 +54,17 @@ const Project = (props) => {
   const assignedTeammates = [];
   const ganttTasks = [];
 
+  const isFound = (arr, name) => {
+    let found = false;
+    arr.forEach((element) => {
+      if (element.name === name) {
+        found = true;
+      }
+      console.log(found);
+    });
+    return found;
+  };
+
   for (let i = 0; i < projectData.tasks.length; i++) {
     let taskObj = {
       taskId: i,
@@ -71,7 +82,10 @@ const Project = (props) => {
         role: projectData.tasks[i].assigneeId.role,
         phoneNumber: projectData.tasks[i].assigneeId.phoneNumber,
       };
-      assignedTeammates.push(teammate);
+
+      if (isFound(assignedTeammates, teammate.name) === false) {
+        assignedTeammates.push(teammate);
+      }
     }
     ganttTasks.push(taskObj);
   }
